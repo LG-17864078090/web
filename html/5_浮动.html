@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            height: 200px;
+            /*display: inline;!*把div变成行元素，不可设置宽高*!*/
+            /*display: inline-block;*/
+            float: left;
+        }
+        #div1{
+            width: 200px;
+            background: black;
+        }
+        #div2{
+            width: 200px;
+            background: red;
+        }
+        #div3{
+            width: 200px;
+            background: darkgreen;
+        }
+        #div4{
+            height: 100px;
+            background: blue;
+            float: none; /*关闭刚开始设置的浮动，但是该会宽度仍为整个屏幕，只是有一部分藏于前三个浮动下方*/
+            clear: both; /*清除其他浮动元素对此div4的影响*/
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+    </div>
+    <div id="div2">
+    </div>
+    <div id="div3">
+    </div>
+    <div id="div4">
+    </div>
+
+</body>
+</html>
