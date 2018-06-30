@@ -6,6 +6,10 @@
     width: 1230px;
     margin: 0 auto;
 }
-a{
+a {
     text-decoration: none;
+}
+
+li{
+    list-style: none; /*去掉列表前的圆点*/
 }
