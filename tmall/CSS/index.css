@@ -4,7 +4,8 @@
     color: white;
     line-height: 32px; /*将文字行设为与容器同高来保持上下居中*/
     font-weight: 100; /*加粗*/
-    font-size: 12px;
+    font-size: 13px;
+    border-bottom: 2px solid #f7f7f7;
 }
 
 #login-contain{
@@ -13,11 +14,7 @@
 
 #login-contain a{
     color: white;
-    margin-left: 20px;
-}
-
-#login-contain a:hover{
-    /*color: red;*/
+    padding:0 10px;
 }
 
 #head-menu{
@@ -28,15 +25,197 @@
     float: left;
     padding:0 14px;
     height: 32px;
+    position: relative;
 }
 
-.menu>a{
+#head-menu .menu>a{
     color: white;
 }
-.menu a:hover{
-    /*color: red;*/
-}
+
 #header .iconfont{
     font-size: 12px;
     color: white;
 }
+#head-menu .menu-hd::after{
+    content: '';
+    border: 3px solid transparent;
+    border-top-color: #bbb;
+    position: absolute;
+    right: 4px;
+    top: 16px;
+    transform-origin: 3px 1.5px;
+    /*!*transition:transform .2s linear;*! 此句在这为鼠标移入移出都有变化*/
+}
+#head-menu .menu:hover::after{
+    transform: rotate(180deg);
+    transition:transform .2s linear;
+}
+#head-menu .menu-hd:hover{
+    background: white;
+}
+#head-menu .menu-hd:hover>a{
+    color: red;
+    text-decoration: underline;
+}
+#head-menu .menu-hd:hover>a{
+    color: red;
+    text-decoration: underline;
+}
+#head-menu .menu-hd:hover .sub-menu{
+    display: block;
+}
+#head-menu .menu-hd:hover .sub-menu2{
+    display: block;
+}
+#head-menu .menu-hd:hover .sub-menu3{
+    display: block;
+}
+#head-menu .menu-hd:hover .total{
+    display: block;
+}
+#head-menu .menu-yel:hover a{
+    color: yellow;
+}
+#head-menu .menu-yel:hover .iconfont{
+    color: yellow;
+}
+#head-menu .menu-icored:hover .iconfont{
+    color: red;
+}
+#head-menu .sub-menu{
+    background: white;
+    position: absolute;
+    top: 32px;
+    left: 0px;
+    width: 110px;
+    border: 2px solid #f7f7f7;
+    border-top: white;
+    display: none;
+}
+#head-menu .sub-menu li{
+    padding: 0 14px ;
+}
+
+#head-menu .menu-hd .sub-menu a{
+    color: #969896;
+}
+#head-menu .menu-hd .sub-menu a:hover{
+    color: red;
+    text-decoration: underline;
+}
+
+#head-menu .sub-menu2{
+    background: white;
+    position: absolute;
+    top: 32px;
+    left: 0px;
+    width: 100px;
+    border: 2px solid #f7f7f7;
+    border-top: white;
+    display: none;
+}
+#head-menu .sub-menu2 li{
+    padding: 0 14px ;
+}
+
+#head-menu .menu-hd .sub-menu2 a{
+    color: #969896;
+}
+#head-menu .menu-hd .sub-menu2 a:hover{
+    color: red;
+    text-decoration: underline;
+}
+
+#head-menu .sub-menu3{
+    background: white;
+    position: absolute;
+    top: 32px;
+    right: 0px;
+    width: 150px;
+    border: 2px solid #f7f7f7;
+    border-top: white;
+    display: none;
+}
+#head-menu .sub-menu3 a{
+    padding: 0 10px ;
+}
+
+#head-menu .menu-hd .sub-menu3 a{
+    color: #969896;
+}
+#head-menu .menu-hd .sub-menu3 a:hover{
+    color: red;
+    text-decoration: underline;
+}
+#head-menu .menu-hd .sub-menu3 p{
+    padding: 0 10px;
+    color: #969896;
+    font-size: 14px;
+    font-weight: 700;
+}
+#head-menu .total{
+    background: white;
+    position: absolute;
+    top: 32px;
+    right: 0px;
+    width: 1060px;
+    border: 2px solid #f7f7f7;
+    border-top: white;
+    display: none;
+}
+#head-menu .total a{
+    padding: 0 5px ;
+    margin: 16px;
+}
+
+#head-menu .menu-hd .total a{
+    color: #969896;
+}
+/*#head-menu .menu-hd .total a:hover{*/
+    /*color: red;*/
+    /*text-decoration: underline;*/
+/*}*/
+#head-menu .menu-hd .total p{
+    padding: 0 21px;
+    color: #969896;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#head-menu .menu-hd .total .three{
+    float: left;
+}
+#head-menu .menu-hd .total .three1 p{
+    color: coral;
+}
+#head-menu .menu-hd .total .three2 p{
+    color: dodgerblue;
+}
+#head-menu .menu-hd .total .three1 a:hover{
+    color: coral;
+    text-decoration: underline;
+}
+#head-menu .menu-hd .total .three2 a:hover{
+    color: dodgerblue;
+    text-decoration: underline;
+}
+#head-menu .menu-hd .total .three3 a:hover{
+    color: #969896;
+    text-decoration: underline;
+}
+
+#head-menu .menu-hd .total .hot,.new{
+     position: relative;
+}
+
+#head-menu .menu-hd .total .icon-new3,.icon-zuirehotxiankuang{
+    position: absolute;
+    right: -14px;
+}
+
+
+
+
+
+
+
