@@ -208,9 +208,17 @@
      position: relative;
 }
 
-#head-menu .menu-hd .total .icon-new3,.icon-zuirehotxiankuang{
+#head-menu .menu-hd .total .icon-zuirehotxiankuang{
+    color: red;
+    font-size: 14px;
     position: absolute;
-    right: -14px;
+    right: -16px;
+}
+#head-menu .menu-hd .total .icon-new3{
+    color: blue;
+    font-size: 14px;
+    position: absolute;
+    right: -16px;
 }
 
 
