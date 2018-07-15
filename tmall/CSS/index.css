@@ -7,7 +7,6 @@
     font-size: 13px;
     border-bottom: 2px solid #f7f7f7;
 }
-
 #login-contain{
     float: left;
 }
@@ -135,6 +134,7 @@
     border: 2px solid #f7f7f7;
     border-top: white;
     display: none;
+    z-index: 1;
 }
 #head-menu .sub-menu3 a{
     padding: 0 10px ;
@@ -159,9 +159,11 @@
     top: 32px;
     right: 0px;
     width: 1060px;
+    padding:10px 0;
     border: 2px solid #f7f7f7;
     border-top: white;
     display: none;
+    z-index: 1;
 }
 #head-menu .total a{
     padding: 0 5px ;
@@ -171,10 +173,7 @@
 #head-menu .menu-hd .total a{
     color: #969896;
 }
-/*#head-menu .menu-hd .total a:hover{*/
-    /*color: red;*/
-    /*text-decoration: underline;*/
-/*}*/
+
 #head-menu .menu-hd .total p{
     padding: 0 21px;
     color: #969896;
@@ -190,6 +189,10 @@
 }
 #head-menu .menu-hd .total .three2 p{
     color: dodgerblue;
+}
+#head-menu .menu-hd .total .three2 li{
+    border-left: 1px solid #ffecec;
+    border-right: 1px solid #ffecec;
 }
 #head-menu .menu-hd .total .three1 a:hover{
     color: coral;
@@ -220,7 +223,363 @@
     position: absolute;
     right: -16px;
 }
+/*#search{*/
+    /*margin: 10px 0;*/
+/*}*/
+#search .wrapper img{
+    width: 240px; /*img为行级元素，但可设置宽高，如果只设置宽，高会同比例缩放*/
+    /*height: 130px;*/
+    float:left;
+    margin-left: -20px;
+}
+#search-contain{
+    float:left;
+    margin-top:40px;
+    margin-left: 90px;
+}
+#search-contain .search-list  li{
+    float:left;
+    height: 18px;
+    margin-top: 5px;
+    padding:0 12px;
+    border-left: 1px solid #969896;
+}
+#search-contain .search-list .li1{
+    padding-left: 0;
+    border-left: 0;
+}
 
+#search-contain .search-input{
+    border:2px solid red;
+    height: 36px;
+}
+
+#search-contain .search-input input{
+    width: 490px;
+    height: 36px;
+    outline: none;
+    border: 0;
+    float: left;
+    text-indent: 10px;
+}
+#search-contain .search-input input::placeholder{
+    font-size: 14px;
+}
+#search-contain .search-input button{
+    width: 132px;
+    height: 36px;
+    border: 0px;
+    background: red;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    float: left;
+}
+#search-contain .search-list .red a{
+    font-size: 14px;
+    display: block;
+    color: red;
+    height: 18px;
+
+}
+#search-contain .search-list .gray a{
+    font-size: 14px;
+    display: block;
+    color: gray;
+    height: 18px;
+}
+#tittle{
+    clear: both;
+    height: 35px;
+}
+#tittle a{
+    display: block;
+    height: 35px;
+    float: left;
+    padding: 0 8px;
+    line-height: 36px;
+    font-weight:500;
+    font-size: 16px;
+    color: black;
+    position: relative;
+    left:200px;
+}
+#tittle a:hover{
+    color: red;
+}
+#tittle img{
+    margin-top: 3px;
+    width: 100px;
+    height: 30px;
+}
+#picture .goodsclass{
+    background: red;
+    width: 200px;
+    height: 36px;
+    float: left;
+    margin-top: -36px;
+}
+#picture .goodsclass i{
+    font-size: 16px;
+    margin-left: 14px;
+    line-height: 36px;
+    color: white;
+
+}
+#picture .bg1{
+    position: relative;
+}
+
+#picture .goodsclass text{
+    font-size: 16px;
+    margin-left: 8px;
+    line-height: 36px;
+    color: white;
+    font-weight: bold;
+}
+#picture .goods-list{
+    float: left;
+    /*opacity: 0.8;*/  /*背景透明度，控制当前及所有后代*/
+    background-color: rgba(0,0,0,0.8);  /*背景颜色及透明度，控制当前页面*/
+    width: 200px;
+    height: 500px;
+    position: absolute;
+}
+#picture .goods-list>ul>li{
+    height: 31.2px;
+    line-height: 31.2px;
+    color: white;
+}
+
+#picture .goods-list>ul>li>a{
+    color: white;
+}
+#picture .goods-list i{
+    margin-left: 14px;
+    margin-right: 4px;
+    height: 31px;
+    line-height: 31px;
+    font-size: 16px;
+    color: white;
+}
+#picture .ads{
+    border-top:1px solid red;
+    height: 500px;
+    background: #d0bba0;
+}
+#picture .ads img{
+    width: 1230px;
+    height: 500px;
+}
+#picture .sub-goodslist{
+    width: 870px;
+    height: 500px;
+    background:white;
+    position:absolute ;
+    left: 200px;
+    top: 1px;
+    display: none;
+    color: black;
+}
+#picture .goods-list .red:hover{
+    background: white;
+    color: red;
+}
+#picture .goods-list .red:hover>a{
+     color: red;
+ }
+#picture .goods-list .red:hover .iconfont{
+    color: red;
+}
+
+#picture .goods-list .blue:hover {
+    background: white;
+    color: blue;
+}
+#picture .goods-list .blue:hover>a{
+    color: blue;
+}
+#picture .goods-list .blue:hover .iconfont{
+    color: blue;
+}
+#picture .goods-list .yellow:hover {
+    background: white;
+    color: yellow;
+}
+#picture .goods-list .yellow:hover>a{
+    color: yellow;
+}
+#picture .goods-list .yellow:hover .iconfont{
+    color: yellow;
+}
+#picture .goods-list .zi:hover {
+     background: white;
+     color: #795da3;
+ }
+#picture .goods-list .zi:hover>a{
+    color: #795da3;
+}
+#picture .goods-list .zi:hover .iconfont{
+    color: #795da3;
+}
+#picture .goods-list .li1:hover .sub-goodslist1{
+     display: block;
+ }
+#picture .goods-list .li2:hover .sub-goodslist2{
+    display: block;
+}
+#picture .goods-list .li3:hover .sub-goodslist3{
+    display: block;
+}
+#picture .goods-list .li4:hover .sub-goodslist4{
+    display: block;
+}
+#picture .goods-list .li5:hover .sub-goodslist5{
+    display: block;
+}
+#picture .goods-list .li6:hover .sub-goodslist6{
+    display: block;
+}
+#picture .goods-list .li7:hover .sub-goodslist7{
+    display: block;
+}
+#picture .goods-list .li8:hover .sub-goodslist8{
+    display: block;
+}
+#picture .goods-list .li9:hover .sub-goodslist9{
+    display: block;
+}
+#picture .goods-list .li10:hover .sub-goodslist10{
+    display: block;
+}
+#picture .goods-list .li11:hover .sub-goodslist11{
+    display: block;
+}
+#picture .goods-list .li12:hover .sub-goodslist12{
+    display: block;
+}
+#picture .goods-list .li13:hover .sub-goodslist13{
+    display: block;
+}
+#picture .goods-list .li14:hover .sub-goodslist14{
+    display: block;
+}
+#picture .goods-list .li15:hover .sub-goodslist15{
+    display: block;
+}
+#picture .goods-list .li16:hover .sub-goodslist16{
+    display: block;
+}
+#picture .sub-goodslist p{
+    margin: 8px 20px;
+    font-weight: 800;
+}
+#picture .sub-goodslist .sub-manylist a{
+    margin: 0px 3px;
+    font-size: 14px;
+    color: #969896;
+    font-weight: 500;
+    float: left;
+}
+#picture .red .sub-goodslist .sub-manylist a:hover{
+    color: red;
+}
+#picture .yellow .sub-goodslist .sub-manylist a:hover{
+    color: yellow;
+}
+#picture .blue .sub-goodslist .sub-manylist a:hover{
+    color: blue;
+}
+#picture .zi .sub-goodslist .sub-manylist a:hover{
+    color: #795da3;
+}
+#picture .goods-list .sub-manyhead{
+     float: right;
+ }
+#picture .goods-list .sub-manylist{
+    float: right;
+    width: 514px;
+    border-bottom: 1px dashed black;
+    margin-right: 10px;
+    line-height: 24px;
+    padding: 12px 8px;
+}
+#picture .goods-list .finally-manylist{
+    border: 0px;
+}
+#picture .goods-list .sub-blank{
+    float: right;
+    width: 200px;
+    height: 490px;
+    border: 5px solid  #f5f5f5;
+    background: white;
+    line-height: normal;
+}
+#picture .goods-list .sub-manylist .redlist{
+    color: red;
+}
+#picture .goods-list .sub-manylist .yellowlist{
+    color: yellow;
+}
+#picture .goods-list .sub-manylist .bluelist{
+    color: blue;
+}
+#picture .goods-list .sub-manylist .zilist{
+    color: #795da3;
+}
+#picture .goods-list .sub-blank img{
+    display:inline-block;
+    width: 94px;
+    border: 1px solid #f5f5f5;
+    margin: 0px;
+}
+
+#three-ads{
+    height: 394px;
+    margin-top: 10px;
+    padding-top: 24px;
+    padding-right: 30px;
+}
+#three-ads .threeads{
+    height: 371px;
+    background: white;
+    float: left;
+    margin-left: 14px;
+}
+#three-ads .three-head{
+    height: 54px;
+    border-bottom: 1px solid white;
+}
+#three-ads .three-head span{
+    line-height: 54px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 10px;
+    font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53', sans-serif;
+}
+#three-ads .three-head .small-span{
+    font-size: 14px;
+}
+#three-ads .three-head a{
+    float: right;
+    color: gray;
+    font-size: 16px;
+    margin-right: 10px;
+    position: relative;
+    top: 15px;
+}
+#three-ads .three-head .more{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    color: #bd2c00;
+    margin-left: 3px;
+    position: relative;
+    top: 4px;
+}
+#three-ads img{
+    height: 316px;
+}
 
 
 
