@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #contain{
+            width: 300px;
+            height: 300px;
+            margin: 0px auto;
+            position: relative;
+        }
+        .red{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+        .blue{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+            left: 101px;
+        }
+        .green{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+            top: 101px;
+        }
+        .yellow{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+            left: 101px;
+            top: 101px;
+          }
+        .blue:hover{
+             z-index: 1;
+             border-color: blue;
+         }
+        .red:hover{
+               border:1px solid red;
+               z-index: 1;
+           }
+        .green:hover{
+            z-index: 1;
+            border-color: green;
+        }
+
+        .yellow:hover{
+            z-index: 1;
+            border-color: yellow;
+        }
+    </style>
+</head>
+<body>
+  <div id="contain">
+      <div class="red">
+
+      </div>
+      <div class="blue">
+
+      </div>
+      <div class="green">
+
+      </div>
+      <div class="yellow">
+
+      </div>
+  </div>
+
+</body>
+</html>
