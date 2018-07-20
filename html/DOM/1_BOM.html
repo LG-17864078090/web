@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--&lt;!&ndash;聚焦绑定&ndash;&gt;-->
+    <!--<label for="ipt1">用户名</label>-->
+    <!--<input id="ipt1" type="text">-->
+    <!--<label for="ipt2">密码</label>-->
+    <!--<input id="ipt2" type="password">-->
+
+    <button id="btn">取消</button>
+    <script>
+        // var oIpt=document.getElementById("ipt1");
+        // oIpt.focus();//使该对象一直聚焦
+        // oIpt.blur();//使该对象失去焦点
+        // console.log(window.screenLeft || window.screenX);//输出浏览器框体距左的距离
+        // console.log(window.screenTop|| window.screenY);//输出浏览器框体距上的距离
+        // console.log(window.innerWidth);//输出浏览器内容区域宽度
+        // console.log(window.innerHeight);//输出浏览器内容区域高度
+        // console.log(window.outerWidth);//输出浏览器框体宽度
+        // console.log(window.outerWidth);//输出浏览器框体高度
+
+        // var w=open('http://www.baidu.com','新窗口的名称','width=300,height=200,left=200,top=200','一个可选的布尔值');
+        // w.moveBy(300,100);//根据自己原先位置向右移动300，向下移动100
+        // w.moveTo(300,100);//根据浏览器框体位置向右移动300，向下移动100
+        // w.resizeBy(400,200);//根据自己原先大小向右扩大400，向下扩大200
+        // w.resizeTo(400,200);//窗口设置为宽400高200
+        // scrollTo(300,400);//滚动指定的像素数 左右上下两个参数
+        // scrollBy(300,400);//把内容滚动到指定的坐标 左右上下两个参数
+
+        // 弹出确认与取消的对话框
+        //    var xx = confirm('确认删除吗');
+        //    if(xx){
+        //        console.log('删除成功');
+        //    }else{
+        //        console.log('已取消');
+        //    }
+
+        //计时器
+
+        //延时2s(2000ms)执行该功能function
+        //  var timer=setTimeout(function () {
+        //      console.log('111111');
+        //      console.log(2222);
+        //  },2000)
+        // clearTimeout(timer);//清除上面整个计时器
+
+        //每隔1s执行一次该功能
+        var timer1 = setInterval(function(){
+            console.log(1);
+        },1000)
+        // clearInterval(timer1);
+        btn.onclick = function(){
+            clearInterval(timer1);
+        }
+    </script>
+
+</body>
+</html>
