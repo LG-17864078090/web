@@ -5,6 +5,59 @@
     <title>Title</title>
 </head>
 <body>
+<p id="p1">p1p1p1p1p1p1</p >
+<!--<p id="p1">ppppppppp</p >-->
 
+<div id="div1" xx="sss">
+    <p>ppppppp</p >
+    <h1>hhhhhhhhh</h1>
+
+    sssssss
+</div>
+<input type="text" name="s1">
+<input type="text" name="s1">
+<input type="text" name="s1" class="111">
+
+<script>
+
+    //           var aP = document.getElementsByTagName('p');
+    //           var p = document.getElementsByName('s1');
+    //            document.getElementsByClassName('')
+
+    //           p[0].style.color = 'green';
+    //           p[1].style.background = 'green';
+
+
+    var odiv = document.getElementById('div1');
+    // console.log(odiv.getAttribute('xx'));
+    // console.log(odiv.id);
+    //
+    // odiv.setAttribute("id","div2");//两种设置属性的方式
+    // odiv.id = 'div2';//不可设置自定义属性，如xx
+    // div.setAttribute('xx','div2');
+
+
+           // console.log(p1.tagName == 'p');// 标签的tagName输出后全为大写
+    //        事件三要素：事件源  事件执行函数  事件本身(事件对象)
+           odiv.onclick = function(e){
+               e = e || window.event;
+               console.log(e.target);  //点击的具体对象
+               console.log(e.currentTarget); //该事件所赋予的对象
+               console.log(this);// 当前对象引用
+
+               if(e.target.tagName =='P'){
+                   console.log(1111);
+               }else{
+                   console.log(2222);
+               }
+           }
+
+
+           function fn(){
+               console.log(this);
+           }
+           fn();
+
+</script>
 </body>
 </html>
