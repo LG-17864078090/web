@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #contain{
+            margin: 100px auto;
+            width: 500px;
+            position: relative;
+        }
+        #contain .menu{
+            float: left;
+            width: 120px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 18px;
+            text-align: center;
+            background: pink;
+            margin: 0 20px;
+        }
+        #contain .menu>a{
+            color: black;
+            display: block;
+            width: 100%;
+        }
+        #contain .hidden{
+            width: 480px;
+            height: 400px;
+            border-top: 3px solid black;
+            background: deeppink;
+            position: absolute;
+            top: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="contain">
+        <ul>
+            <li class="menu">
+                <a href="">项目一</a>
+            </li>
+            <li class="menu">
+                <a href="">项目二</a>
+            </li>
+            <li class="menu">
+                <a href="">项目三</a>
+            </li>
+            <div class="hidden">111</div>
+            <div class="hidden">222</div>
+            <div class="hidden">333</div>
+        </ul>
+    </div>
+
+    <script>
+        var aLi = document.getElementsByClassName('menu');
+        var aDiv = document.getElementsByClassName('hidden');
+        for (var i=0;i<aLi.length;i++) {
+            aLi[i].xx=i;
+            aLi[i].onclick = function () {
+                for(var i=0;i<aLi.length;i++){
+                    aLi[i].style.background='pink';
+                    aLi[i].getElementsByTagName('a')[0].style.color='black';
+                    aDiv[i].style.display='none';
+                }
+                this.style.background='black';
+                this.getElementsByTagName('a')[0].style.color='white';
+                aDiv[this.xx].style.display='block';
+                return false;
+            }
+        }
+        aLi[0].style.background = 'black';
+        aLi[0].getElementsByTagName('a')[0].style.color='white';
+        aDiv[0].style.display='block';
+    </script>
+</body>
+</html>
+
+//改变类名来更改样式
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+    <!--<style>-->
+        <!--*{-->
+            <!--margin: 0;-->
+            <!--padding: 0;-->
+        <!--}-->
+        <!--li{-->
+            <!--list-style: none;-->
+        <!--}-->
+        <!--#contain{-->
+            <!--width: 400px;-->
+            <!--margin: 100px auto;-->
+        <!--}-->
+        <!--#contain ul{-->
+            <!--height: 30px;-->
+        <!--}-->
+        <!--#contain li{-->
+            <!--float: left;-->
+            <!--height: 30px;-->
+            <!--width: 120px;-->
+            <!--text-align: center;-->
+            <!--line-height: 30px;-->
+            <!--background: #cccccc;-->
+            <!--margin-right: 10px;-->
+            <!--color:#fff;-->
+        <!--}-->
+        <!--#contain div{-->
+            <!--width: 400px;-->
+            <!--height: 270px;-->
+            <!--background: #ccc;-->
+            <!--border-top: 1px solid #000;-->
+            <!--position: absolute;-->
+            <!--display: none;-->
+        <!--}-->
+        <!--#contain li.selected{-->
+            <!--background: #000000;-->
+            <!--color:red;-->
+        <!--}-->
+        <!--#contain div.show{-->
+            <!--display: block;-->
+        <!--}-->
+    <!--</style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="contain">-->
+    <!--<ul>-->
+        <!--<li class="selected">1111</li>-->
+        <!--<li>2222</li>-->
+        <!--<li>3333</li>-->
+    <!--</ul>-->
+    <!--<div class="show">aaaa</div>-->
+    <!--<div>bbbb</div>-->
+    <!--<div>cccc</div>-->
+<!--</div>-->
+<!--<script>-->
+    <!--var aLi = document.getElementsByTagName('li');-->
+    <!--var oContain = document.getElementById('contain');-->
+    <!--var aDiv = oContain.getElementsByTagName('div');-->
+    <!--for(var i=0;i<aLi.length;i++){-->
+        <!--aLi[i].index = i;-->
+        <!--aLi[i].onclick = function(){-->
+            <!--for(var j=0;j<aLi.length;j++){-->
+                <!--aLi[j].className ='';-->
+                <!--aDiv[j].className = '';-->
+            <!--}-->
+            <!--this.className = 'selected';-->
+            <!--aDiv[this.index].className = 'show';-->
+        <!--}-->
+    <!--}-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
