@@ -1474,9 +1474,9 @@
                         <a href="">
                             <div class="sale-item first-saleitem1">
                                 <div class="sub-item">
-                                    <li>
+                                    <li class="select">
                                         <p>今日疯抢</p>
-                                        <div class="sub-hidden">
+                                        <div class="sub-hidden select-show">
                                             <div>
                                                 <img src="image/sub-hidden3.png" alt="">
                                                 <span>限时限量疯抢</span>
@@ -1695,5 +1695,22 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        var oLi = document.getElementsByClassName('first-saleitem1')[0].getElementsByTagName('li');
+        var oDiv = document.getElementsByClassName('sub-hidden');
+        for(var i=0;i<oLi.length;i++){
+            oLi[i].index=i;
+            oLi[i].onmouseover = function () {
+                for(var i=0;i<oLi.length;i++){
+                    oLi[i].className='';
+                    oDiv[i].className='sub-hidden';
+                }
+                this.className='select';
+                oDiv[this.index].className='sub-hidden select-show';
+            }
+        }
+    </script>
 </body>
 </html>

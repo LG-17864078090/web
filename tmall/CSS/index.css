@@ -751,7 +751,7 @@
     margin-bottom: 15px;
     background: white;
 }
-#sale .sale-list .sale-goods .right-sale .sale-item:hover{
+#sale .sale-list .sale-goods .right-sale .sale-item:not(.first-saleitem1):hover{
     border: 1px solid  red;
 }
 #sale .sale-list .sale-goods .right-sale .first-saleitem1{
@@ -776,12 +776,12 @@
     font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53';
     color: black;
 }
-#sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item li:hover{
-    background: #00b262;
-}
-#sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item li:hover .sub-hidden{
-    display:  block;
-}
+/*#sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item li:hover{*/
+    /*background: #00b262;*/
+/*}*/
+/*#sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item li:hover .sub-hidden{*/
+    /*display:  block;*/
+/*}*/
 #sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item .sub-hidden{
     width: 450px;
     height: 230px;
@@ -790,6 +790,22 @@
     top: 50px;
     display: none;
 }
+
+
+
+
+#sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item .select{
+    background: #00b262;
+}
+#sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item .select-show{
+    display: block;
+}
+
+
+
+
+
+
 #sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item .sub-hidden img{
     position: absolute;
     right: 0px;
