@@ -17,6 +17,10 @@
             position: absolute;
             display: none;
         }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
         #menu li{
             height: 30px;
             line-height: 30px;
@@ -43,6 +47,7 @@
 
     <script>
         var oMenu = document.getElementById("menu");
+
         document.oncontextmenu = function (e) {
             oMenu.style.display = 'block';
             if((window.innerWidth-e.clientX)<oMenu.offsetWidth){
@@ -68,6 +73,12 @@
         }
         document.onclick = function () {
             oMenu.style.display = 'none';
+            console.log(window.innerHeight);
+            console.log(document.documentElement.offsetHeight);
+            console.log(window.outerHeight);
+            console.log(window.innerWidth);
+            console.log(document.documentElement.offsetWidth);
+            console.log(window.outerWidth);
         }
 
         // JS  for循环作划入划出点击
@@ -82,14 +93,7 @@
             aLi[i].onclick = function () {
                 alert(this.innerHTML);
             }
-
         }
-        console.log(window.innerHeight);
-        console.log(document.documentElement.offsetHeight);
-        console.log(window.outerHeight);
-        console.log(window.innerWidth);
-        console.log(document.documentElement.offsetWidth);
-        console.log(window.outerWidth);
 
 
     </script>
