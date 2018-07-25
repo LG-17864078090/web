@@ -18,10 +18,12 @@
             overflow: hidden;
             border:1px solid red;
             margin: 100px auto;
+            background: pink;
         }
         #container .nav{
-            width: 800px;
+            width: 1000px;
             position: absolute;
+            margin-top: 10px;
             left: 0;
         }
         #container .nav li{
@@ -30,27 +32,30 @@
             text-align: center;
             line-height: 80px;
             color: white;
-            background: black;
+            background: deeppink;
             font-size: 30px;
             margin-right:20px;
             float: left;
         }
         #container .button{
             width: 210px;
-            height: 100px;
+            height: 50px;
             margin: 0px auto;
             position: absolute;
-            bottom: -20px;
-            left:90px;
+            bottom: 10px;
+            left:50%;
+            transform: translateX(-50%);
         }
         #container .button li{
             width: 60px;
             height: 40px;
             text-align: center;
-            line-height: 45px;
+            line-height: 40px;
             margin: 5px;
-            background: gray;
+            font-size: 20px;
+            background: deeppink;
             float: left;
+            color: white;
             cursor: pointer;
         }
     </style>
@@ -61,16 +66,18 @@
             <li>2</li>
             <li>3</li>
             <li>4</li>
+            <li>5</li>
             <li>1</li>
             <li>2</li>
             <li>3</li>
             <li>4</li>
+            <li>5</li>
         </ul>
 
         <ul class="button" id="button-container">
-            <li>向左</li>
-            <li>暂停</li>
-            <li>向右</li>
+            <li><</li>
+            <li>●</li>
+            <li>></li>
         </ul>
     </div>
     <script>
@@ -95,9 +102,10 @@
 
 
 
+        var temp=0;
         function left() {
              timer = setInterval(function () {
-                var temp = getComputedStyle(oList,false).left;
+                temp = getComputedStyle(oList,false).left;
                 temp=parseInt(temp);
                 temp--;
                 if(temp==(-parseInt(getComputedStyle(oList,false).width)/2)){
@@ -108,7 +116,7 @@
         }
         function right() {
             timer = setInterval(function () {
-                var temp = getComputedStyle(oList,false).left;
+                temp = getComputedStyle(oList,false).left;
                 temp=parseInt(temp);
 
                 if(temp==0){
