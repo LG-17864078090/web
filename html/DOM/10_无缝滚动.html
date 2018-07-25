@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        #container{
+            width: 400px;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            border:1px solid red;
+            margin: 100px auto;
+        }
+        #container .nav{
+            width: 800px;
+            position: absolute;
+            left: 0;
+        }
+        #container .nav li{
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            line-height: 80px;
+            color: white;
+            background: black;
+            font-size: 30px;
+            margin-right:20px;
+            float: left;
+        }
+        #container .button{
+            width: 210px;
+            height: 100px;
+            margin: 0px auto;
+            position: absolute;
+            bottom: -20px;
+            left:90px;
+        }
+        #container .button li{
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            line-height: 45px;
+            margin: 5px;
+            background: gray;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+</head>
+    <div id="container">
+        <ul class="nav" id="list-container">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+
+        <ul class="button" id="button-container">
+            <li>向左</li>
+            <li>暂停</li>
+            <li>向右</li>
+        </ul>
+    </div>
+    <script>
+        var oList = document.getElementById('list-container');
+        var oMenu = document.getElementById('button-container').getElementsByTagName('li');
+        oMenu[0].onclick = function () {
+            clearInterval(timer);
+            left();
+        }
+        oMenu[1].onclick = function () {
+            clearInterval(timer);
+        }
+        oMenu[2].onclick = function () {
+            clearInterval(timer);
+            right();
+        }
+        for(var i=0;i<oMenu.length;i++){
+            oMenu[i].onselectstart = function () {
+                return false;
+            }
+        }
+
+
+
+        function left() {
+             timer = setInterval(function () {
+                var temp = getComputedStyle(oList,false).left;
+                temp=parseInt(temp);
+                temp--;
+                if(temp==(-parseInt(getComputedStyle(oList,false).width)/2)){
+                    temp = 0;
+                }
+                oList.style.left = temp+'px';
+            },5)
+        }
+        function right() {
+            timer = setInterval(function () {
+                var temp = getComputedStyle(oList,false).left;
+                temp=parseInt(temp);
+
+                if(temp==0){
+                   temp= -parseInt(getComputedStyle(oList,false).width)/2;
+                }
+                temp++;
+                oList.style.left = temp+'px';
+            },5)
+        }
+         left();
+        function stop() {
+            clearInterval(timer);
+        }
+    </script>
+
+</body>
+</html>
