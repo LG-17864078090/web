@@ -9,11 +9,40 @@
     <div id="div1">div</div>
     <div class="div2">222</div>
     <div class="div2">333</div>
+
+    <ul id="ul1">
+        <li>001</li>
+        <li>002</li>
+        <li class="li3">003</li>
+        <li>004</li>
+        <li>005</li>
+        <li>3333</li>
+        <p></p>
+        <p>ppppppp</p>
+    </ul>
+    <h1>h1hh1h</h1>
+    <h2>hh2h2h2</h2>
+    <div>
+        <p>oooo</p>
+    </div>
+    <div>
+        <h1>hhhhhhh</h1>
+    </div>
     <script src="jquery-1.12.4.js"></script>
     <script>
-       // $(function(){
-       //     console.log(1111);
-       // });
+       $(function(){
+           // $('#ul1 li:lt(2)').css('background','red');//选中下标小于2的li
+          // $('#ul1 li:last').css('background','red');//选中#ul1 最后一个li
+//           $('#ul1 li:odd').css('background','red');//选中#ul1 下奇数元素li
+//            $(':header').css('background','red');//选中所有标题H
+//
+//           var a = '.li3';
+//           $('#ul1 li:not('+ a +')').css('background','red');
+
+//           $('#ul1 li:contains(3)').css('background','red');//选中含有3字符串的li
+//           $('p:parent').html('p1p1p1p1p');//选中有结点的p标签并把它的内容改成p1p1p1p1p
+//           $('div:has(p)').css('background','red');//选中有p的div
+       });
 
        // 文档就绪函数，与window.onload类似，但是此方法可以写多个，window.onload要等所有资源加载完之后才调用
 //        $(document).ready(function(){
@@ -39,7 +68,14 @@
 
     console.log($('.div2'));
     // 找到通过此类名获取到的Jq对象的编号为1的jq对象
-       $('.div2').eq(1).css('background','green');
+
+
+    //    $('.div2').eq(1).css('background','green').css('color','blue');
+       $('.div2').css({
+           background:'blue',
+           color:'red',
+           'font-size':18
+       })
 
     </script>
 </body>
