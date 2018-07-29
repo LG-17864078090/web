@@ -20,11 +20,12 @@
 <script>
     $('#all').on('click',function () {
         $('input[type="checkbox"]').prop('checked',true);
-    })
+    });
     $('#no').on('click',function () {
         $('input[type="checkbox"]').prop('checked',false);
-    })
+    });
     $('#inverse').on('click',function () {
+        //.each():遍历该jq对象集合中的所有元素，默认两个参数，下标index和js原生对象elem
         $('input[type="checkbox"]').each(function (index,elem) {
             // if($(elem).prop('checked')==true){
             //     $(elem).prop('checked',false);
@@ -32,7 +33,7 @@
             //     $(elem).prop('checked',true);
             // }
             elem.checked = !elem.checked;
-        })
+        });
     })
 </script>
 </body>
