@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        textarea{
+            display: block;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<button id="up">向上</button>
+<button id="down">向下</button>
+<textarea name="" id="text1" cols="20" rows="10">文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化文本框高度变化</textarea>
+
+
+<script src="../../../jquery-1.12.4.js"></script>
+<script>
+    $('#up').on('click',function () {
+        console.log($('#text1').scrollTop());
+        $('#text1').animate({
+           scrollTop:$('#text1').scrollTop()-50
+        },400)
+    })
+    $('#down').on('click',function () {
+        $('#text1').animate({
+            scrollTop:$('#text1').scrollTop()+50
+        },400)
+    })
+
+
+</script>
+
+</body>
+</html>
