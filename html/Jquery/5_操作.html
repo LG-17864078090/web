@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<div id="div3">
+    <div id="div1">
+        <p>pppppp</p>
+    </div>
+    <h2>222</h2>
+</div>
+
+<div id="div2">
+    div2
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+
+    $('p').unwrap();//去除该对象的亲父代
+    //    $('<p>pppppp</p>').appendTo($('#div1')).css('background','red');
+    //    $('#div1').append($('<p>pppppp</p>')).css('background','red');
+    //    $('#div1').html('<h1>hhhhhhh</h1>');//识别标签后添加
+    //    $('#div2').text('<h1>hhhhhhh</h1>');//以纯文本添加
+    //    $('#div1').after('<h1>hhhhhhh</h1>');//紧贴在后面添加兄弟
+    //    $('#div1').before('<h1>hhhhhhh</h1>');//紧贴在前面添加兄弟
+    //        $('#div1').click(function () {
+    //            console.log(11111);
+    //        });
+    ////        console.log();
+    ////        var xx = $('#div1').detach();//返回值中有事件相关联
+    //        var xx = $('#div1').remove();//返回值中事件无相关联
+    //        console.log(xx);
+    //        $('#div2').after(xx);
+</script>
+</body>
+</html>
