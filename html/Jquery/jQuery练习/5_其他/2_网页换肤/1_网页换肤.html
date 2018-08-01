@@ -63,7 +63,7 @@
 
     $('li').on('click',function () {
         $(this).css('border','1px solid black').siblings().css('border','');
-        $('.show').find('span').removeClass().addClass($(this).attr('class'));
+        $('.show').children('span').removeClass().addClass($(this).attr('class'));
     })
 
 
