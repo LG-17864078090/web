@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="div1">
+        111111
+        <div id="div2">
+            2222222
+            <div id="div3">
+                3333333
+            </div>
+        </div>
+    </div>
+
+    <script>
+           var oDiv1 = document.getElementById('div1');
+           var oDiv2 = document.getElementById('div2');
+           var oDiv3 = document.getElementById('div3');
+
+            // 事件的  冒泡  与  捕获
+           //冒泡：事件由内而外执行
+           //捕获：事件的由外而内执行
+           // oDiv1.onclick = function () {
+           //     console.log(11111);
+           // }
+           // oDiv2.onclick = function () {
+           //     console.log(22222);
+           // }
+           // oDiv3.onclick = function (e) {
+           //     console.log(33333333);
+           //     // e.cancelBubble = true; //IE浏览器阻止冒泡
+           //     e.stopPropagation(); //标准浏览器阻止冒泡
+           // }
+           // // elem.onclick为属性值，写多个时后者将会覆盖前者
+           // // oDiv3.onclick = function () {
+           // //     console.log(44444444444);
+           // // }
+           function fn() {
+               console.log(1111);
+           }
+           // //标准浏览器中参数为false默认为冒泡，由内而外执行
+           // oDiv1.addEventListener('click',fn,false);
+           // oDiv2.addEventListener('click',function () {
+           //     console.log(2222);
+           // },false);
+           // oDiv3.addEventListener('click',function () {
+           //     console.log(33333333);
+           // },false);
+
+           //标准浏览器中参数为true默认为捕获，由外而内执行
+           oDiv1.addEventListener('click',fn,true);
+           oDiv2.addEventListener('click',function () {
+               console.log(2222);
+           },true);
+           oDiv3.addEventListener('click',function () {
+               console.log(33333333);
+           },true);
+           oDiv1.removeEventListener('click',fn);//删除事件
+
+
+           // //IE浏览器无捕获功能，冒泡的实现与阻止如下
+           // var fn = function(){
+           //     alert(11111);
+           // }
+           // div1.attachEvent('onclick',fn);
+           // div1.detachEvent('onclick',fn);
+
+
+
+    </script>
+</body>
+</html>

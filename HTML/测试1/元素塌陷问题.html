@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            background: #cccccc;
+        }
+        #div2 {
+            width: 200px;
+            height: 200px;
+            background: #ff0000;
+            float: left;
+        }
+        .clearfix:after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="div1" class="clearfix">
+    <div id="div2">
+
+    </div>
+    <!--<div id="div3">-->
+
+    <!--</div>-->
+</div>
+</body>
+</html>
+<!--1．	当子元素为float时可以给父元素加overflow：hidden解决塌陷问题-->
+<!--2．	可以通过添加一个空的div来撑起父元素的高度-->
+<!--3．	写一个clearfix的类  .clearfix:after{content:’’;clear:both;display:block;}-->

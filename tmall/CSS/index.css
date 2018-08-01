@@ -800,6 +800,9 @@
 #sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item .select-show{
     display: block;
 }
+#sale .sale-list .sale-goods .right-sale .first-saleitem1 .sub-item .select>p{
+    color: white;
+}
 
 
 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        #left{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+        }
+        #left #select{
+            width: 100px;
+            height: 100px;
+            background: rgba(250,250,250,.6);
+            position: absolute;
+            display: none;
+            cursor: move;
+        }
+        #right{
+            display: none;
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            overflow: hidden;
+            left: 420px;
+        }
+        #right img{
+            position: absolute;
+            top:-200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="left">
+        <div id="select">
+        </div>
+        <img src="image/small.jpg" alt="">
+    </div>
+    <div id="right">
+        <img id="Img" src="image/big.jpg" alt="">
+    </div>
+
+    <script>
+        var oLeft = document.getElementById('left');
+        var oRight = document.getElementById('right');
+        var oSelect = document.getElementById('select');
+        var oImg = document.getElementById('Img');
+
+        oLeft.onmouseover = function () {
+            oSelect.style.display='block';
+            oRight.style.display = 'block';
+            oLeft.onmousemove = function (e) {
+                var left = e.clientX;
+                var top = e.clientY;
+                var templeft ,temptop;
+                if(left<(oSelect.offsetWidth/2)){
+                    templeft= 0 ;
+                }else if((oLeft.offsetWidth-left)<(oSelect.offsetWidth/2)){
+                    templeft = oLeft.offsetWidth-oSelect.offsetWidth;
+                }else{
+                    templeft=left-oSelect.offsetWidth/2;
+                }
+                if(top<(oSelect.offsetHeight/2)){
+                    temptop= 0 ;
+                }else if((oLeft.offsetHeight-top)<(oSelect.offsetHeight/2)){
+                    temptop = oLeft.offsetHeight-oSelect.offsetHeight;
+                }else{
+                    temptop=top-oSelect.offsetHeight/2;
+                }
+                oSelect.style.left=templeft+'px';
+                oSelect.style.top=temptop+'px';
+
+                var XX=oLeft.offsetWidth/oSelect.offsetWidth;
+                var YY=oLeft.offsetHeight/oSelect.offsetHeight;
+                oImg.style.width=XX*oRight.offsetWidth + 'px';
+                oImg.style.height=YY*oRight.offsetHeight + 'px';
+
+                var ratioX=(oImg.offsetWidth-oRight.offsetWidth)/(oLeft.offsetWidth-oSelect.offsetWidth);
+                var radioY=(oImg.offsetHeight-oRight.offsetHeight)/(oLeft.offsetHeight-oSelect.offsetHeight);
+
+                oImg.style.left= templeft*-ratioX + 'px';
+                oImg.style.top= temptop*-radioY + 'px';
+            }
+
+        }
+        oLeft.onmouseout = function () {
+            oSelect.style.display='none';
+            oRight.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

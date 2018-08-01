@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+    <ul id="ul1">
+        <li>1111</li>
+        <li>2222</li>
+        <li>3333</li>
+    </ul>
+</div>
+    <button id="add">add</button>
+    <script>
+        var oUl = document.getElementById('ul1');
+        var oBtn = document.getElementById('add');
+
+        //事件委托  或者  事件代理
+        //适用于子元素功能相同的情况
+        //优点：减少function内存空间的开辟以及后加元素的事件功能
+        oUl.onclick = function (e) {
+            console.log(e.target.innerHTML);
+            // console.log(e.currentTarget.innerHTML);
+            e.stopPropagation();//li上的事件冒泡到ul处即终止冒泡
+        }
+
+        oBtn.onclick = function () {
+           var aLi = document.createElement('li');
+           aLi.innerHTML = Math.random();
+           oUl.appendChild(aLi);
+        }
+    </script>
+</body>
+</html>

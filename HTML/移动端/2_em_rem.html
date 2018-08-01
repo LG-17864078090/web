@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            font-size: 22px;
+        }
+        #div1{
+            /*//浏览器font-size最小为12px*/
+            font-size: 18px;
+        }
+        #div3{
+            width: 10em;
+            height: 10em;
+            background: red;
+        }
+        #div4{
+            width: 1rem;
+            height: 1rem;
+            background: blue;
+        }
+
+    </style>
+</head>
+<body>
+<!--//em: 单位大小等于父元素的字体大小-->
+<!--//rem: 单位大小等于html标签的字体大小-->
+
+<div id="div1">
+    <div id="div2">
+        <div id="div3">
+
+        </div>
+    </div>
+</div>
+<div id="div4"></div>
+    <script>
+        //设置内容随窗口自适应
+        document.body.onresize = function () {
+            var Width = document.documentElement.clientWidth;
+            document.documentElement.style.fontSize = Width/5 + 'px';
+            console.log(document.getElementById('div4').offsetWidth);
+        }
+    </script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<div id="div2">-->
+<!--div2-->
+<!--</div>-->
+<div id="div1">
+    99999999
+    <div id="div2">
+        div2
+    </div>
+    <div>
+        ddddd
+
+    </div>
+</div>
+
+<script>
+
+    var oDiv = document.getElementById('div1');
+    var oDiv2 = document.getElementById('div2');
+
+    //        var divs = document.getElementsByTagName('div');  不是数组
+    //        divs.push('21111');
+
+    // 把oDiv2作为孩子添加至oDiv内部末尾，并删除原来的oDiv2
+    //        oDiv.appendChild(oDiv2);
+    var p = document.createElement('p');
+    var s = document.createTextNode('sssssss');
+    p.appendChild(s);
+    //        p.innerHTML = '111111';
+
+    oDiv.insertBefore(p, oDiv2);
+    //        oDiv.appendChild(p);
+    //        var o = oDiv.removeChild(oDiv2);
+    //        console.log(o);
+
+    // 有结点返回true 没有就返回false
+    //        console.log(oDiv.hasChildNodes());
+
+
+    //        console.log(getNext(oDiv2));
+    console.log(getFirst(oDiv));
+
+
+    // 定义函数获取下个结点解决并兼容性问题
+    function getNext(elem){
+        do{
+            elem = elem.nextSibling
+        }while (elem.nodeType != 1 && elem != null);
+        return elem;
+    }
+
+    // 定义函数获取首个元素结点并解决兼容性问题
+    function getFirst(elem) {
+        var f = elem.firstChild;
+        return f.nodeType != 1? getNext(f):f;
+    }
+
+</script>
+</body>
+</html>

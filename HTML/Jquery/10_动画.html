@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: deeppink;
+        }
+    </style>
+</head>
+<body>
+
+
+<button id="show">显示</button>
+<button id="hide">隐藏</button>
+<button id="trans">转换</button>
+<button id="stop">暂停</button>
+<div id="div1">div</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $('#show').on('click',function () {
+        // $('#div1').show(); //宽高 透明度
+        // $('#div1').fadeIn();//透明度
+        // $('#div1').slideDown();//宽或高折叠，不变透明度
+
+        $('#div1').animate({
+              width:500
+          },2000,'linear',function () {
+              console.log(1111);
+          }).animate({
+              height:300
+          },2000,'linear',function () {
+              console.log(222);
+          })
+    });
+
+    $('#hide').on('click',function () {
+        // $('#div1').hide();
+        // $('#div1').fadeOut();
+        // $('#div1').slideUp();
+
+    });
+
+    $('#trans').on('click',function () {
+        // $('#div1').toggle();
+        // $('#div1').fadeToggle();
+        // $('#div1').slideToggle();
+    });
+
+    $('#stop').on('click',function () {
+        $(':animated').html('aaaaaa');//选中当前执行动画的对象
+        $('#div1').stop(true,false);//第一个参数操作动画队列，第二个决定当前动画是否立即完成
+
+    });
+</script>
+
+</body>
+</html>

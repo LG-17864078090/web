@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*h1 ~ .ppp{ !*选择E元素后面的所有兄弟元素F，元素E与F必须同属一个父级*!*/
+        /*color:red;*/
+        /*}*/
+
+        p[class|='fff']{
+            color:red;
+        }   /*选中类名叫fff的p标签*/
+        a:link{
+            color:green;
+        }
+        a:visited{
+            color:blue;
+        }
+        a:hover{
+            color:red;
+        }
+        a:active{
+            color:yellow;
+        }
+        /*input:focus{*/
+        /*color:red;*/
+        /*}*/
+        /*p:first-child{*/
+        /*color:red;*/
+        /*}*/ /*该p元素是父元素第一个孩子被选中*/
+        /*p:first-of-type{*/
+        /*color:red;*/
+        /*}*/ /*该父元素第一个孩子叫p的元素被选中*/
+
+        /*ul li:nth-of-type(4){*/
+        /*color:red;*/
+        /*}*/ /*匹配父元素的第n个子元素li。*/
+        li:nth-child(3n){
+            color:red;
+        }  /*匹配父元素的第n个子元素li，假设该子元素不是li，则选择符无效。*/
+        p:empty{ /*匹配没有任何子元素（包括text节点）的元素E。*/
+            height: 100px;
+            background: #ff0000;
+        }
+        input:checked{ /*匹配用户界面上处于选中状态的元素E。男女，足球篮球排球*/
+            width: 20px;
+            height: 20px;
+        }
+        :disabled{ /*处于禁用状态的元素E。*/
+            background: #ff0000;
+        }
+        ::selection{ /*设置对象被选择时的样式。*/
+            background: #ff0000;
+            color:#00ff00;
+        }
+        ::first-line{/*第一行*/
+            color:blue;
+        }
+        ::first-letter{ /*第一字符*/
+            color:pink;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <!--<p></p >-->
+    <!--<p>ppppp</p >-->
+
+
+    <!--<ul>-->
+    <!--<li>001</li>-->
+    <!--<li>002</li>-->
+    <!--<li>003</li>-->
+    <!--<li>004</li>-->
+    <!--<li>005</li>-->
+
+    <form action="xxx.html"><!--//表格上传到xxx.网站-->
+        用户名：<input type="text" name="username">
+
+        密码：<input type="password">
+
+        性别：<input name='sex' type="radio" checked="checked">女
+        <input name='sex' type="radio">男
+
+        爱好： <input type="checkbox">足球  <input type="checkbox">排球
+        <input type="checkbox">篮球
+
+        <input type="submit" value="注册">
+        <input type="reset" >
+        <button type="button" disabled="disabled">申请</button>
+    </form>
+</div>
+</body>
+
+
+
+
+
+
+    <!--<p></p >-->
+    <!--<p>ppppp</p >-->
+
+
+    <!--<ul>-->
+    <!--<li>001</li>-->
+    <!--<li>002</li>-->
+    <!--<li>003</li>-->
+    <!--<li>004</li>-->
+    <!--<li>005</li>-->
