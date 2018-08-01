@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #center{
+            width: 1200px;
+            margin: 0 auto;
+        }
+        #center  h2{
+            height: 80px;
+            width: 100%;
+            text-align: center;
+            line-height: 80px;
+            background: #cccccc;
+        }
+        #center .img{
+            background: url("01.jpg") no-repeat;
+            background-size: contain;
+            padding-top: 675px;
+        }
+        #center .massage{
+            overflow: hidden;
+        }
+        #center .massage div{
+            font-size: 20px;
+            float: left;
+            padding: 1%;
+            word-break: keep-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
+        #center .massage .left{
+            width: 58%;
+            height: 300px;
+            margin-right: 3%;
+            background: #00ff00;
+
+        }
+        #center .massage .right{
+            width: 35%;
+            height: 300px;
+            background: yellow;
+        }
+        @media (max-width: 1200px) {
+            #center{
+                width: 100%;
+            }
+            #center .img{
+                padding-top: 56%;
+                /*//相对于父元素宽的百分比*/
+            }
+
+        }
+        @media (max-width: 560px) {
+            #center .massage .left{
+                width: 100%;
+            }
+            #center .massage .right{
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div id="center">
+    <div class="head">
+        <h2>页 头</h2>
+        <h2>导 航</h2>
+    </div>
+    <div class="img">
+    </div>
+    <div class="massage">
+        <div class="left">
+            听人说一个人的时候，温起壶中酒；独倚拜月楼，望着庭中盛放的满院流光；凄冷的冬风定会静静的摇落下一地的相思，只为承载起那些忧伤孤独的过往，在岁月的年轮中不停的刻圈成画；却始终画不到那个所谓的终点。有你的曾经一直潜藏在故事里蔓延着最为凄美的片段，梦中的枯藤已千年不绿；被风吹干后的答案；夺走了彼此记忆中最为动人的拥抱。那些禁锢在心底深处的怅然，冲淡了相聚时的喜悦与快乐；难以掩盖的忧伤中载满了无法清点不舍与难过。
+        </div>
+        <div class="right">
+            人生短短十数载，梁月何时绕梦中？当彼此的相遇早已为离别埋下了深深的伏笔，当插肩而过时也不会在为过客不留的画面挽留下最后一丝温存；回忆总是美的让人心碎，曾经的过往依旧使人这般沉吟至今。或许那般留恋本不应该赖在记忆中，转进我心里霸占着每一寸缝隙。
+        </div>
+    </div>
+    <div>
+        <h2>页尾</h2>
+    </div>
+</div>
+
+</body>
+</html>
