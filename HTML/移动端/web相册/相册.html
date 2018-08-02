@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+        }
+        #contain{
+            border-collapse: collapse;
+        }
+        #contain img{
+            float: left;
+            width: 25%;
+            box-sizing: border-box;
+            border: 2px solid black;
+        }
+        #show{
+            display: none;
+            color: white;
+            height: 100%;
+            background-color: black;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        #show span{
+            display: none;
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,.6);
+            padding:4px 14px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="contain"></div>
+<div id="show">
+    <span class="last">已是最后一张</span>
+    <span class="first">已是第一张</span>
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script src="../zepto.js"></script>
+<script src="../touch.js"></script>
+<script src="../fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+
+        var str = '';
+        var ImgCount = 24;
+        var Imgindex=0;
+        for(var i=0; i<ImgCount; i++){
+            // $('#contain').append('<img src="img/thumbs/'+(i+1)+'.jpg">'); //频繁DOM操作，速度慢
+            str += '<img src="img/thumbs/'+(i+1)+'.jpg">';
+        }
+        $('#contain').html(str);
+        $('#contain').on('click','img',function () {
+            Imgindex=$(this).index();
+
+            $('#contain').slideUp();
+            $('#show').css('background-image','url(img/'+(Imgindex+1)+'.jpg)').fadeIn();
+        });
+
+        $('#show').on('click',function () {
+            $('#contain').slideDown();
+            $('#show').fadeOut();
+        }).on('swipeLeft',function () {
+            Imgindex++;
+            if(Imgindex==ImgCount){
+                Imgindex=ImgCount-1;
+                $('#show .last').show();
+                dispaly($('#show .last'));
+            }
+            $('#show').css('background-image','url(img/'+(Imgindex+1)+'.jpg)').fadeIn();
+        }).on('swipeRight',function () {
+            Imgindex--;
+            if(Imgindex==-1){
+                Imgindex=0;
+                $('#show .first').show();
+                dispaly($('#show .first'));
+            }
+            $('#show').css('background-image','url(img/'+(Imgindex+1)+'.jpg)').show();
+        });
+
+
+        function dispaly(elem) {
+            timer = setTimeout(function () {
+                elem.fadeOut();
+            },1000);
+        }
+    })
+</script>
+</body>
+</html>
