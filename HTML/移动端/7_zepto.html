@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: blue;
+        }
+        #div2{
+            width: 100px;
+            height: 100px;
+            background: #55a532;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+</div>
+
+<div id="div2">
+</div>
+<script src="zepto.js"></script>
+<script src="touch.js"></script>
+<script src="fastclick.js"></script>
+<script>
+    //    fastclick.js  引入此文件解决tab穿透问题
+    // click  :  点击事件，判断是否双击 所以点击后延时300毫秒执行
+    // tab  :  点击事件，点击后立即执行
+
+    $(function(){
+        FastClick.attach(document.body); //解决tab穿透
+
+        $('#div2').on('tap',function(){
+            $(this).hide();
+            console.log(22222);
+        });
+
+        $('#div1').on('click',function(){
+            console.log(1111111111);
+        });
+
+
+    })
+
+</script>
+</body>
+</html>
