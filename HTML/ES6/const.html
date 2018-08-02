@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //const : 常量
+    const NUM = 10;
+    console.log(NUM);
+
+
+    const OBJ = {  //此时存的地址，地址不可变，里面内容可变
+        name:'zhangsan',
+        age:14
+    };
+    OBJ.name='lisi';
+    console.log(OBJ.name);
+
+    const OBJ1 = {
+        name:'zhangsan',
+        age:14
+    };
+    Object.freeze(OBJ1); //冻结OBJ1 ，使里面内容不可变更
+    OBJ1.name='lisi';
+    console.log(OBJ1.name);
+
+
+
+</script>
+</body>
+</html>
