@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    // Map:类似于对象
+    var map = new Map();
+    //      键名  键值
+    map.set('12',3456);
+    map.set(12,'2342');
+    map.set(true,334);
+    map.set(undefined,'adsa');
+    map.set(null,'qwe');
+    map.set(12,'5678'); //覆盖前者键名为12的值
+
+    map.delete(12);
+    map.clear();
+
+    console.log(map.get(12));//获取键名为12的值
+    console.log(map.size);//获取长度
+
+
+</script>
+
+</body>
+</html>
