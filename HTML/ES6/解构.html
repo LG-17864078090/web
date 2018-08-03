@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // var arr = [1,2,[4,5]];
+    // var [x,y] = arr;
+    // console.log(x,y);
+
+    // var [x,y,s]=arr;
+    // console.log(x,y,s); //s为数组
+
+    // var [,,[z,w]] = arr;
+    // console.log(z,w);
+
+    // var [x,y,[z,w]]=arr;
+    // console.log(x,y,z,w);
+
+
+    // var arr = [1,2];
+    // var [a,b,c=10] = arr;//c=10 :当arr中c为定义或者值为undefined的时候使用该默认值
+    // console.log(a,b,c);
+
+
+    //不定义第三变量交换数值
+    // var a = 20 , b = 10;
+    //1
+    // a=a+b;
+    // b=a-b;
+    // c=a-b;
+    // console.log(a,b);
+
+    //2
+    // var [b,a]=[a,b];
+    // console.log(a,b);
+
+    //3
+    // b=[a,a=b][0];
+    // console.log(a,b);
+
+
+    var obj = {
+        a:1,
+        b:2,
+        d:{
+            e:5
+        }
+    };
+    // var {a,b} = obj;  //去obj找a，b并把值赋给｛｝内的a,b
+    // console.log(a,b);
+    //
+    // var {b,a} = obj;
+    // console.log(a,b);
+
+    // var {a,b,d:{e}}=obj;
+    // console.log(e);
+
+    // var {a:x,b:y} = obj; //去obj找a，b并把值相互对应赋给｛｝内的x,y
+    // console.log(x,y);
+    //
+    // var {a:x,b:y,c:z=333} = obj; //去obj找a，b，c并把值相互对应赋给｛｝内的x,y，z，
+    // console.log(x,y,z);     //如果obj内没有找到或者找到后的值为undefined，就用自己的默认值333
+
+
+    // function f([a=1,b=3]) {  //默认值为1和3，相当于f([a=1,b=3]=[....])
+    //     console.log(a,b);
+    // }
+    // f([]);
+    // f([,4]);
+
+
+
+       function fn({a:x,b:y=3}){
+           console.log(x,y);
+       }
+       fn({});
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
