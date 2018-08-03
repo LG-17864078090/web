@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // 三种改变this指向(第一个参数为对象)
+    // 1.call() 改变指向并调用
+    // 2.apply() 改变指向并调用
+    // 3.bihd() 改变指向并返回一个函数
+
+    function fn(a,b) {
+        console.log(a,b);
+        console.log(this);
+    }
+    var o = {
+        mane : 'zs'
+    };
+    fn.call(o,1,2);
+    fn.apply(o,[1,2]); //apply 必须传数组
+    fn.apply(o,[1]);
+    var f = fn.bind(o,1,3);// 改变this指向并返回一个函数
+    f();
+
+
+</script>
+
+</body>
+</html>

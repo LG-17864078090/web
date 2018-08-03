@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li>001</li>
+    <li>002</li>
+    <li>003</li>
+    <li>004</li>
+</ul>
+
+<!--箭头函数与普通函数的区别-->
+<!--1.this指向-->
+    <!--箭头函数里面的this是定义时指向-->
+    <!--普通函数里面的this是运行时指向-->
+    <!--普通函数指向当前对象，箭头函数指向上级对象-->
+<!--2.arguement-->
+    <!--普通函数不传形参可以通过arguement获取调用函数是传的参数，箭头函数不能-->
+<!--3.构造函数-->
+    <!--箭头函数定义类时没有构造函数，不能new-->
+
+<script>
+    var aLi = document.getElementsByTagName('li');
+    // for(var i=0;i<aLi.length;i++){
+    //     aLi[i].onclick = function () {
+    //         // console.log(this.innerHTML);//直接输出
+    //
+    //         //延时输出
+    //         setTimeout(function () {
+    //             console.log(this.innerHTML);//timeout所属对象windows，此时this指向windows
+    //         },1000);
+    //
+    //         var TH = this; //定义一个变量代替this解决this指向问题
+    //         setTimeout(function () {
+    //             console.log(TH.innerHTML);
+    //         },1000);
+    //
+    //         setTimeout(()=> {//箭头函数解决this指向问题
+    //             console.log(this.innerHTML);/
+    //         },1000);
+    //     }
+    //
+    // }
+
+    // function fn(a,b) {
+    //     console.log(a,b);
+    // }
+    // fn(1,2);
+
+    // var fn = (a,b)=>{
+    //     console.log(a,b);
+    // };
+    // fn(1,2)
+
+
+    // function f() { //普通函数定义无参调用传参
+    //     console.log(arguments[0]);
+    // }
+    // f(1);
+    // var fn = ()=>{  //箭头函数没有arguement
+    //     console.log(arguments[0]);
+    // };
+    // fn(1);
+
+
+    // function User() {
+    //     this.name='zs';
+    // }
+    // var u = new User();
+    // console.log(u.name);
+    //
+    // var User=() =>{
+    //     this.name='zs';
+    // };
+    // var u = new User();
+    // console.log(u.name);
+
+    var OBJ1 = {
+        name : 'zs',
+        age : 12,
+        // say:function (){
+        //     console.log(this.age);
+        //     }
+        // say : ()=> {
+        //        console.log(this.age);
+        //      }
+        };
+        OBJ1.say(); //对象内的箭头函数调用时指向对象的上一级
+
+
+
+
+
+</script>
+
+</body>
+</html>

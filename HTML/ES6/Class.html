@@ -6,6 +6,9 @@
 </head>
 <body>
 <script>
+
+    // function 定义类
+
     // function Person(n) {
     //     this.name = n;
     // }
@@ -28,31 +31,47 @@
     // s.say();
     // s.Age();
 
+// class定义类
 
-    class Person{
+    // class Person{
+    //     constructor(n){
+    //         this.name = n;
+    //     }
+    //     say(){
+    //         console.log(this.name);
+    //     }
+    // }
+    // var p = new Person('zs');
+    // p.say();
+    //
+    //
+    // class Son extends Person{
+    //     constructor(n,a){
+    //         super(n);
+    //         this.age = a;
+    //     }
+    //     Age(){
+    //         console.log(this.age);
+    //     }
+    // }
+    // var s = new Son('ls',15);
+    // s.say();
+    // s.Age();
+
+
+    class User{
         constructor(n){
             this.name = n;
         }
-        say(){
-            console.log(this.name);
+        static say(a,b){
+            return a+b;
         }
     }
-    var p = new Person('zs');
-    p.say();
 
+    var U = new User('zs');
+    // U.say();//类内的静态函数不能通过对象调用
 
-    class Son extends Person{
-        constructor(n,a){
-            super(n);
-            this.age = a;
-        }
-        Age(){
-            console.log(this.age);
-        }
-    }
-    var s = new Son('ls',15);
-    s.say();
-    s.Age();
+    console.log(User.say(1,2));//类内的静态函数要通过类名直接调用，常用于制作工具栏
 </script>
 
 </body>

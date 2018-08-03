@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //...
+
+    // var a1 = [1,2,3];
+    // var a2 = [...a1,4,5];
+    // console.log(a1);
+    // console.log(a2);
+
+    // var a = [1,2,3,4,5],b = [7,8,9];
+    // var c = [...a,...b];
+    // console.log(c);
+
+
+    //数组复制
+    // var a=[1,2,3];
+    // var b=a; //此时为复制地址，没有为b开辟内存
+    // b[1]=4;
+    // console.log(b);
+    // console.log(a);
+
+    //数组复制
+    // var a=[1,2,3];
+    // var b=[...a];
+    // b[1]=4;
+    // console.log(b);
+    // console.log(a);
+    //数组复制  // concat:链接多个数组
+    // var a=[1,2,3];
+    // var b=a.concat([]);
+    // b[1]=4;
+    // console.log(b);
+    // console.log(a);
+    //
+    // var c = [4,5,6];
+    // var d = a.concat(c,b,['aaa',8]);
+    // console.log(d);
+
+
+
+    // rest
+    var fn = (...args)=>{
+        console.log(args[0]);
+    };
+    fn(1,2,3);//输出1
+    fn([1,2,3]);//输出数组123
+
+
+</script>
+
+</body>
+</html>
