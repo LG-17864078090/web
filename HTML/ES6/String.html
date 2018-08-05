@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    var p = 'pppppppp';
+    // var str = "<div><p>pppp</p><h3>h3h3h3</h3></div>"; //回车换行编译器自定添加+来拼接字符串
+    // var str = "<div>" +
+    //     "<p>pppp</p>" +
+    //     "<h3>h3h3h3</h3>>" +
+    //     "</div>";
+
+    // var str = "<div><p>"+p+"</p><h3>h3h3h3</h3></div>";
+    // console.log(str);
+
+    //模版字符串
+    // ${}里面可以放表达式
+    var str1 = `<div><p>${p}</p><h3>h3h3h3</h3></div>`;
+    console.log(str1);
+    var a=1,b=4;
+    var str2 = `<div><p>${a+b==5? true:false}</p></div>`;
+    console.log(str2);
+
+    var str3 = '宝宝心里苦';
+
+    console.log(str3.includes('宝宝'));//判断字符串是否包括某一字符串，返回布尔值
+    console.log(str3.startsWith('宝宝'));//判断字符串是否以某一字符串开始，返回布尔值
+    console.log(str3.endsWith('宝宝'));//判断字符串是否以某一字符串结束，返回布尔值
+
+    console.log(str3.includes('宝宝'),2);//判断字符串从下标n开始是否包括某一字符串，返回布尔值
+    console.log(str3.startsWith('宝宝'),2);//判断字符串从下标n开始是否以某一字符串开始，返回布尔值
+    console.log(str3.endsWith('宝宝'),2);//判断字符串在下表n以前是否以某一字符串结束，返回布尔值
+
+    console.log(str3.repeat(3));//重复n次拼接成一个新的字符串并返回，不改变原来的值
+    console.log(str3);
+
+
+    var str4 = 'abc';
+
+    console.log(str4.padStart(10,'1234'));//补全字符串
+    console.log(str4.padEnd(10,'1234'));
+</script>
+
+</body>
+</html>
