@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+
+    // Array.from()  把类数组转化为真的数组
+    var obj = {  //当对象的键值是数组下标时才能添加到数组中,找不到对应下标的数组值为undefined
+        0:"dsf",
+        1:"34ds",
+        2:345,
+        5:'ddd',
+        length:8  //把对象转化为数组时要给对象添加长度
+    };
+    var arr1 = Array.from(obj);
+    console.log(arr1);
+
+
+    //二维数组转化为map
+    var arr2 = [[12,4],[3,3],['ads',4]];
+    var map = new Map(arr2);
+    console.log(map);
+
+    map.set('ac',1);
+    map.set(true,3);
+    //map转化为二维数组
+    console.log(Array.from(map));
+
+
+    // var arr = new Array(3);//新建一个长度为3的数组
+    // var arr = new Array.of(3);//新建一个长度为一数值为3的数组
+
+    var arr3 = new Array(3,4,5,2,57).fill(10);//将数组中的值替换为10
+    // var arr3 = new Array(3,4,5,2,57,45,356,323).fill(10,2);//将数组中下标2以后的值替换为10
+    // var arr3 = new Array(3,4,5,2,57,45,356,323).fill(10,2,5);//将数组中下标2到5（不包括5）的值替换为10
+    console.log(arr3);
+
+    var arr4 = [1,4,6,2,43,7,3,56,8,4];
+    arr4.forEach(function (val,index) {//forEAch 两个参数，第一个为数值，第二个是下标，无返回值
+       console.log(val,index);
+    });
+
+    console.log(arr4.map(function (val,index) {///map 两个参数，第一个为数值，第二个是下标，返回一个新数组
+        if(index>3){
+            return 11;
+        }else{
+            return val+1;
+        }
+    }));
+    console.log(arr4);
+
+
+    console.log(arr4.filter(function(xx,index){//返回数组中满足一系列条件的元素
+        xx +=10;
+        return index > 3;
+    }));
+
+
+</script>
+</body>
+</html>
