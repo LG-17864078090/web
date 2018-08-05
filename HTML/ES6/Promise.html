@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+
+    //回调嵌套
+    // $.get('a.json',function (data) {
+    //     console.log(data.a);
+    //     $.get('b.json',{},function (data) {
+    //         console.log(data.b);
+    //         $.get('c.json',{},function (data) {
+    //             console.log(data.c);
+    //         },'json');
+    //     },'json');
+    // },'json');
+
+
+    //p.then()
+    // var p = new Promise(function (resolve,reject) {
+    //     console.log('000');
+    //     setTimeout(function () {
+    //         resolve(1111);
+    //     },1000);
+    // });
+    // p.then((data)=>{
+    //     console.log(data);
+    //     return new Promise(function (resolve, reject) {
+    //         setTimeout(function () {
+    //             resolve(222);
+    //         },1000);
+    //     });
+    // }).then((data)=>{
+    //     console.log(data);
+    // });
+
+
+    // var p1 = new Promise(function (resolve,reject) {
+    //     setTimeout(function () {
+    //         resolve(1111);
+    //     },3000);
+    // });
+    // var p2 = new Promise(function (resolve,reject) {
+    //     setTimeout(function () {
+    //         resolve(222);
+    //     },1000);
+    // });
+    // var p3 = new Promise(function (resolve,reject) {
+    //     setTimeout(function () {
+    //         resolve(33333);
+    //     },100);
+    // });
+
+    // Promise.all 等三个全部异步成功后执行，并把三个的返回值按参数顺序排列到数组中
+    // var p = Promise.all([p1,p2,p3]);
+    // p.then((data)=>{
+    //     console.log(data);
+    //     console.log('成功');
+    // },(data)=>{
+    //     console.log('失败');
+    // });
+
+
+    //竞速
+    // var p = Promise.race([p1,p2,p3]); //获得数组内时间最短的返回值
+    // p.then((data)=>{
+    //     console.log(data);
+    // },(data)=>{
+    //     console.log(data+'sssss');
+    // });
+
+
+    var Num = 0;
+    setTimeout(function () {
+        Num++;
+    },1000);
+    setTimeout(function () {
+        Num++;
+    },1000);
+    setTimeout(function () {
+        Num++;
+    },1000);
+    // if(Num==3){ //此时不会输出333，因为上面延时不会影响下面代码执行
+    //     console.log(333);
+    // }
+
+    var timer = setInterval(function () {
+        if(Num==3){
+            console.log(33);
+            clearTimeout(timer);
+        }
+
+    },50)
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
