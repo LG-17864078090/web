@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // var n = 'xxxx';
+    // var str = 'my';
+    // var myName = 'sssssssss';
+    //
+    // //对象属性缩写
+    // var obj = {
+    //     n,  //对象内的属性没值时回去找同名全局变量的值
+    //     age:12,
+    //     [str + 'Name']:'sssss'//动态属性不能使用属性缩写
+    // };
+    // console.log(obj);
+    //
+    // var o1 = {
+    //     age:12
+    // };
+    // var o2 = {
+    //     a:o1,
+    //     b:2
+    // } ;
+    // console.log(Object.assign(o2,{c:3,b:5},{d:4}));//对象合并返回到第一个参数对象中
+    // o2.a.age = 15;
+    // console.log(o2,o1);
+
+    console.log(-0===+0);
+    console.log(NaN===NaN);
+    console.log(Object.is(+0,-0));
+    console.log(Object.is(NaN,NaN));
+
+    // Object.is() 判断两个值是否相同。如果下列任何一项成立，则两个值相同：
+    // 1.两个值都是 undefined
+    // 2.两个值都是 null
+    // 3.两个值都是 true 或者都是 false
+    // 4.两个值是由相同个数的字符按照相同的顺序组成的字符串
+    // 5.两个值指向同一个对象
+    // 6.两个值都是数字并且
+    //     .都是正零 +0
+    //     .都是负零 -0
+    //     .都是 NaN
+    //     .都是除零和 NaN 外的其它同一个数字
+
+    var arr = [1,2,4,NaN,3,5,2];
+    //给所有数组添加方法，判断是否含有某一元素并返回下标
+    Array.prototype.hasElem = function (n) {
+        for(var i=0;i<this.length;i++){
+            if(Object.is(n,this[i])){
+                return i;
+            }
+        }
+        return -1;
+    };
+    console.log(arr.indexOf(NaN));
+    console.log(arr.hasElem(NaN));
+</script>
+
+</body>
+</html>
