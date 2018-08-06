@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+
+    // function* f1() {
+    //     yield  'hello';
+    //     yield  'world';
+    //     yield  'genetator';
+    //     return 0;
+    // }
+    // var ff1 = f1(); //必须把函数赋值到一个变量里
+    // console.log(ff1.next());
+    // console.log(ff1.next());
+    // console.log(ff1.next());
+    // console.log(ff1.next());//调用了return 0，获得值0，状态done 变成 true
+
+
+    // function* f2() {
+    //     var x = 2 * (yield 5+3); //此时yield对象的value值为8，对象不能与数相乘
+    //     var y = yield x/4;
+    //     return y;
+    // }
+    //
+    // var ff2 = f2();
+    // var a = ff2.next();
+    // var b = ff2.next(a.value);//next()参数是给上一个yield赋值
+    // var c = ff2.next(b.value);
+    // console.log(a);
+    // console.log(b);
+    // console.log(c);
+
+
+    function request(url) {
+        $.get(url,res=>{
+            console.log(res);
+            f.next();
+        });
+    }
+    function* fn() {
+        yield request('a.json');
+        yield request('a.json');
+        yield request('a.json');
+    }
+    var f = fn();
+
+    //一起调用
+    // var a = f.next();
+    // var b = f.next();
+    // var c = f.next();
+    // console.log(a);
+    // console.log(b);
+    // console.log(c);
+
+    //逐个调用
+    f.next();
+
+</script>
+
+</body>
+</html>

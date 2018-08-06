@@ -56,6 +56,7 @@
     // });
 
     // Promise.all 等三个全部异步成功后执行，并把三个的返回值按参数顺序排列到数组中
+                 //若有失败就返回最快失败的值
     // var p = Promise.all([p1,p2,p3]);
     // p.then((data)=>{
     //     console.log(data);
@@ -70,7 +71,7 @@
     // p.then((data)=>{
     //     console.log(data);
     // },(data)=>{
-    //     console.log(data+'sssss');
+    //     console.log(data+'fail');
     // });
 
 
