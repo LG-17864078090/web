@@ -1,9 +1,10 @@
 @charset "utf-8";
+@import "_commen";//引入comment中的属性
 //这是一个单行注释
 /* 这是一个多行注释*/
 /*！这是一个强制注释*/
 /*！正常情况唯独单行注释不能保存到新的文件中，但压缩模式只有强制注释才能转化进去*/
-$color : #f00;
+$color : rgba(0,0,0,.5);
 $bg:background;
 $sp:span;
 #div1{
@@ -13,7 +14,6 @@ $sp:span;
   font-size: 16px;
   a{
     background: #00b262;
-
     &:hover{
       color: #404040;
     }
@@ -38,4 +38,81 @@ $sp:span;
       color: #7A45E5;
     };
   };
+}
+
+@mixin name($size,$color:#ccc){//$color 默认值
+  width: $size;
+  height: $size;
+  color: $color;
+}
+#div4{
+  @include name(200px);
+}
+#div5{
+  /*@include name(300px,#0f0);*/
+  @include name($color:#0f0,$size:300px);//参数传入顺序变化时前面加入形参名字
+  a{
+    font-size: 30px;
+  }
+}
+
+#div6{
+  color: #0000ff;
+  @extend #div5; //属性继承后生成分组选择器同时选择两个后添加属性，此时div6会有一个单独的再来添加特有的属性
+}
+#div7{
+  color: lighten($color,20%);//颜色变浅
+  //color: darken($color,20%);//颜色变深
+  background: opacify($color,.3);//更不透明
+  //background: transparentize($color,.3);//更透明
+}
+
+$m:(light:#000,dark:#fff);
+#div8{
+  color: map_get($m,light);//获取某value
+  //key:map-keys($m); 返回所有key值
+  //value:map-values($m);  返回所有value值
+  //key:map-has-key($m, light); 是否包含某key
+  //map:map-merge($m, (gray: #ccc)) 合并map
+  //map-remove($m, light, dark);  移除某属性
+}
+
+@for $i from 1 through 5{  //从1到5循环
+  .cl-#{$i}{
+    width: $i + px;
+  }
+}
+@for $i from 1 through 5{  //从1到5循环(不包括5)
+  .cll-#{$i}{
+    width: $i + px;
+  }
+}
+
+$list:success,fail,warm;
+
+@each $var in $list{
+  .#{$var}{
+    background: icon-$var;
+  }
+}
+
+$i:5;
+@while $i>2{
+  .div{
+    width: 10px*$i;
+  }
+  $i:$i - 2;//此处减号必有空格
+}
+
+@function name($num){
+  @if($num > 10){
+    @return $num -10;
+  }@else if($num > 5){
+    @return $num - 5;
+  }@else{
+    @return $num - 1;
+  }
+}
+#div10{
+  width: name(4)+px;
 }
