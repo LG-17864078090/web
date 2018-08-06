@@ -1,0 +1,41 @@
+@charset "utf-8";
+//这是一个单行注释
+/* 这是一个多行注释*/
+/*！这是一个强制注释*/
+/*！正常情况唯独单行注释不能保存到新的文件中，但压缩模式只有强制注释才能转化进去*/
+$color : #f00;
+$bg:background;
+$sp:span;
+#div1{
+  background: $color;
+}
+#div2{
+  font-size: 16px;
+  a{
+    background: #00b262;
+
+    &:hover{
+      color: #404040;
+    }
+    &-taxt{/* &接着上个选择器拼接成新的选择器 */
+      position: relative;
+    }
+  }
+}
+##{$sp}{//变量作为属性名或者选择器时不能直接使用，需要用 #{变量名} 转化回来
+  #{$bg}:red;
+}
+#div3{
+  background:{
+    color: #7A45E5;
+    position: right;
+    size: cover;
+  }
+  border:{
+    top: {
+      width: 2px;
+      style: dashed;
+      color: #7A45E5;
+    };
+  };
+}
