@@ -57,7 +57,7 @@
             aA[i].xx = i;
             // aA[i].flag=true;
 
-            //通过对象.style.xx获取的属性只能获取到内联样式，所以此处判断不可调换位置
+            //通过对象.scss-style.xx获取的属性只能获取到内联样式，所以此处判断不可调换位置
             aA[i].onclick = function () {
                 if(getstyle(aSubMenu[this.xx],'display') == 'block'){
                     aSubMenu[this.xx].style.display = 'none';
@@ -65,10 +65,10 @@
                     aSubMenu[this.xx].style.display = 'block';
                 }
                 // if(this.flag){
-                //     aSubMenu[this.xx].style.display = 'block';
+                //     aSubMenu[this.xx].scss-style.display = 'block';
                 //     this.flag = false;
                 // }else{
-                //     aSubMenu[this.xx].style.display = 'none';
+                //     aSubMenu[this.xx].scss-style.display = 'none';
                 //     this.flag = true;
                 // }
                 return false;
@@ -78,7 +78,7 @@
         //获取属性三种方法
         //对象.currentStyle.xx     IE浏览器
         //getComputedStyle(对象,false).xx   标准浏览器
-        //对象.style.xx   只能获取到内联样式
+        //对象.scss-style.xx   只能获取到内联样式
 
         //封装函数解决兼容性问题
         function getstyle(elem,prop) {
