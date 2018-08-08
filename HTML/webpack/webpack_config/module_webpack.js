@@ -1,5 +1,8 @@
 //模块：例如解读css，图片如何转换，压缩
-const module ={
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
+const module_webpack ={
     rules:[
         {
             test:/\.css$/,
@@ -51,4 +54,4 @@ const module ={
             }
         }
     ]};
-module.exports = module;
+module.exports = module_webpack;
