@@ -1,0 +1,28 @@
+#div1{
+    width: 200px;
+    height: 200px;
+    background: #ff0000;
+}
+#div2{
+    width: 580px;
+    height: 580px;
+    background: url("../image/logo.jpg");
+}
+#div3 img{
+    width: 700px;
+}
+@keyframes xxx {
+
+}
+
+@media (max-height: 500px) {
+
+}
+
+.right {
+
+}
+.select {
+
+}
+
