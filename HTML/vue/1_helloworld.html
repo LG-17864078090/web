@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app" v-html="HH">
+    <!--{{massage}}-->
+</div>
+
+<!--v-text="massage"-->
+<!--v-html="HH"-->
+
+<script src="vue.js"></script>
+<script>
+
+    //MVC
+    // model view control
+
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            massage:'hello world',
+            HH:'<h1>hhhhh</h1>'
+        }
+    });
+
+</script>
+
+
+</body>
+</html>

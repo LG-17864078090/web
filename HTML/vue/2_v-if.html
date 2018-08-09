@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+    <!--<div v-if="xx == 'b'">if</div>-->
+    <!--<div v-else-if="xx == 'A'">else if</div>-->
+    <!--<div v-else>else</div>-->
+
+
+    <!--<div v-if="msg">ifififif</div>-->
+    <!--<div v-else>elseelse</div>-->
+
+    <!--<template v-if="msg">  &lt;!&ndash;//template加载后不显示该父元素只显示内容&ndash;&gt;-->
+        <!--<p>pppppp</p>-->
+        <!--<h1>hhhhh</h1>-->
+        <!--<div>dddddd</div>-->
+    <!--</template>-->
+
+
+</div>
+
+<!--v-if  v-else-if v-else   如果不满足条件则该模块不渲染-->
+<!--v-show 一直渲染，更改display属性-->
+
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg: false,
+            xx:'A'
+        }
+    });
+</script>
+
+</body>
+</html>

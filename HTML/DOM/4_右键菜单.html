@@ -67,7 +67,7 @@
             // e.returnValue = false;//IE浏览器
             // e.preventDefault();//标准浏览器
             //  return false;//通用
-        }
+        };
         document.onclick = function () {
             oMenu.style.display = 'none';
             console.log(window.innerHeight);
@@ -76,17 +76,17 @@
             console.log(window.innerWidth);
             console.log(document.documentElement.offsetWidth);
             console.log(window.outerWidth);
-        }
+        };
 
         // JS  for循环作划入划出点击
         var aLi =oMenu.getElementsByTagName("li");
         for(var i=0;i<aLi.length;i++){
             aLi[i].onmouseover = function () {
                 this.style.background = 'gray';
-            }
+            };
             aLi[i].onmouseout = function () {
                 this.style.background = '';
-            }
+            };
             aLi[i].onclick = function () {
                 alert(this.innerHTML);
             }

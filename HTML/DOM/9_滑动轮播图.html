@@ -89,7 +89,7 @@
         aLi[i].onmouseover = function () {
             nowIndex = this.index;
             changeImg(this.index);
-        }
+        };
         aLi[i].onselectstart = function(){
             return false;
         };
@@ -100,14 +100,14 @@
             nowIndex = 0;
         }
         changeImg(nowIndex);
-    }
+    };
     oPrev.onclick = function(){
         nowIndex--;
         if(nowIndex == -1){
             nowIndex = aLi.length - 1;
         }
         changeImg(nowIndex);
-    }
+    };
     oNext.onselectstart = function(){
         return false;
     };
@@ -125,15 +125,15 @@
 
     oContainer.onmouseover = function () {
         clearInterval(timer);
-    }
+    };
     oContainer.onmouseout = function () {
         play();
-    }
+    };
 
 
     var fn = function(){
         oNext.onclick();
-    }
+    };
 
     function play(){
         timer = setInterval(fn,2000);

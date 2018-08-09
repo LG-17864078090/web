@@ -86,14 +86,14 @@
         oMenu[0].onclick = function () {
             clearInterval(timer);
             left();
-        }
+        };
         oMenu[1].onclick = function () {
             clearInterval(timer);
-        }
+        };
         oMenu[2].onclick = function () {
             clearInterval(timer);
             right();
-        }
+        };
         for(var i=0;i<oMenu.length;i++){
             oMenu[i].onselectstart = function () {
                 return false;
