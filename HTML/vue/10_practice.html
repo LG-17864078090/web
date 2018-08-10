@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="text" @keyup="Filter()" v-model="val">
+    <button @click="Add">Add</button>
+    <ul>
+        <li v-for="(obj,index) in arr" :class="{red:obj.color}" @click="obj.color=!obj.color" v-if="obj.display">
+            {{obj.text}}
+            <button @click="del(index)">Del</button>
+        </li>
+    </ul>
+</div>
+
+<script src="vue.js"></script>
+<script>
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            val:'',
+            arr:[],
+        },
+        methods:{
+            Add(){
+                if(this.val){
+                    var obj = {
+                        text:this.val,
+                        color:false,
+                        display:true
+                    };
+                    this.arr.push(obj);
+                }
+
+                this.arr.sort(function (a,b) {
+                    return a.text - b.text;
+                });
+                this.val='';
+                this.arr.forEach(function (obj) {
+                    obj.display = 'true';
+                })
+            },
+            Filter(){
+                    this.arr.forEach((elem,index)=>{
+                        if(elem.text.indexOf(this.val) != -1){
+                            elem.display = true;
+                        }else{
+                            elem.display = false;
+                        }
+                    });
+            },
+            del(index){
+                console.log(index);
+                this.arr.splice(index,1);
+            }
+
+        }
+    });
+
+</script>
+</body>
+</html>

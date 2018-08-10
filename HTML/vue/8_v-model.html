@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="msg">
+    {{msg}}
+</div>
+
+<!--v-model  双向数据绑定，只存在于表单-->
+
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+       el:"#app",
+       data:{
+           msg:0,
+       }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #app{
+            width: 400px;
+            margin: 0 auto;
+        }
+        #app .right{
+            float: right;
+        }
+        li{
+            list-style: none;
+            height: 80px;
+            line-height: 80px;
+            font-size: 20px;
+            width: 90%;
+            padding: 0 20px;
+            background: green;
+            margin: 20px 0;
+        }
+        #app .red{
+            background: red;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="val in arr" @click="choise(val)" :class="{red:val.flag}">
+            <span>{{val.name}} </span>
+            <span class="right">{{val.price}}</span>
+        </li>
+    </ul>
+
+    <hr>
+    total:
+    <span class="right">{{total}}</span>
+
+    <!--<span class="right">{{count}}</span>-->
+</div>
+
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            total:0,
+           arr:[{
+               name:'aaa',
+               price:234,
+               flag:false
+           },{
+               name:'bbb',
+               price:927,
+               flag:false
+           },{
+               name:'ccc',
+               price:264,
+               flag:false
+           },{
+               name:'ddd',
+               price:589,
+               flag:false
+           },{
+               name:'eee',
+               price:721,
+               flag:false
+           }]
+
+       },
+        methods:{
+            choise(val){
+                val.flag = !val.flag;
+                if(val.flag){
+                    this.total = this.total + val.price;
+                }else{
+                    this.total = this.total - val.price;
+                }
+            }
+        },
+        computed:{
+            count(){
+                let sum = 0;
+                for(var i=0;i<this.arr.length;i++){
+                    if(this.arr[i].flag){
+                       sum = sum += this.arr[i].price
+                    }
+                }
+                return sum;
+            }
+        }
+
+    });
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <!--普通循环-->
+        <!--<li v-for="i in 3">-->
+            <!--{{msg}}-->
+        <!--</li>-->
+
+        <!--数组循环-->
+        <!--（）内参数顺序为 值，下标-->
+       <!--<li v-for="(val,index) in arr">-->
+           <!--{{val}},{{index}}-->
+       <!--</li>-->
+
+        列表循环
+        <li v-for="(val,index) in sortList">
+            {{index}}:姓名：{{val.name}}, 年龄：{{val.age}};
+        </li>
+
+        <!--对象循环-->
+        <!--（）内参数顺序 值 键值 下标-->
+        <!--<li v-for="(val,key,index) in obj">-->
+           <!--{{index}}. {{key}}:{{val}}-->
+        <!--</li>-->
+
+    </ul>
+</div>
+
+<script src="vue.js"></script>
+<script>
+
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello world',
+            arr:[111,222,333,444],
+            list:[{
+                mane:"zs",
+                age:13
+            },{
+                name:"军事基地",
+                age:10
+            },{
+                name:"G港",
+                age:21
+            },{
+                name:"Y城",
+                age:33
+            }],
+            obj:{
+                name:"ssss",
+                age: 12,
+                school:"黑大",
+                home:"山东"
+            }
+        },
+        computed:{
+            sortList(){
+                return this.list.sort(function (a,b) {
+                    return a.age - b.age;
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>
