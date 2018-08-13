@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <demo1 :yy="m1" x-m-sg="hahahah">
+        <p slot="p1">pppppppp</p>
+        <span slot="span">spanspanspan</span>
+        ssssss
+    </demo1>
+</div>
+
+
+<script type="text/x-template" id="temp">
+    <div>
+        {{yy}}
+        <slot>  <!--/如果demo中有没有对应slot的标签，则添加至此-->
+
+        </slot>
+        <slot name="p1">
+            <p>我是默认的p1p1p1p1</p>   <!--//demo中没有与name对应标签的话就使用此默认标签-->
+        </slot>
+        <slot name="span">
+            我是默认的span
+        </slot>
+        <h2>{{XMSg}}</h2>
+    </div>
+
+</script>
+<script src="vue.js"></script>
+<script>
+
+
+
+
+    new Vue({
+        el:'#app',
+        data:{
+            msg:111,
+            m1:1234
+        },
+        components:{
+            demo1:{
+                template:"#temp",
+                props:['yy','XMSg']
+            }
+        }
+    });
+    // new Vue({
+    //     el:'#app1',
+    // })
+
+</script>
+
+</body>
+</html>

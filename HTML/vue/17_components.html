@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--<demo></demo>-->
+
+    <demo1 :yy="m1" x-m-sg="hahahah"></demo1>   <!--//动态属性加冒号-->
+                    <!--//大写的属性转换：第一个直接变小写，其余大写字母换成-小写 -->
+</div>
+
+
+
+<!--<div id="app1">-->
+    <!--<demo></demo>-->
+<!--</div>-->
+
+<script src="vue.js"></script>
+<script>
+
+    //Vue.component() 定义全局组件
+    // Vue.component('demo',{
+    //     template:"<h1>hhhhhhhhh</h1>>"
+    // });
+
+
+    new Vue({
+        el:'#app',
+        data:{
+            msg:111,
+            m1:1234
+        },
+        components:{  //定义局部组件
+            demo1:{   //demo为名称
+                template:"<div>{{yy}} <h2>{{XMSg}}</h2> </span></div>",  //template定义组件内容(只能有一个根元素)
+                props:['yy','XMSg']
+            }
+        }
+    });
+    // new Vue({
+    //     el:'#app1',
+    // })
+
+</script>
+
+</body>
+</html>
