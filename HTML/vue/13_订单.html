@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <span>是否需要额外付费设施</span>
+    <input type="checkbox" @click="show = !show">
+    <ul v-if="show">
+        <li v-for="(val,index) in arr">
+            {{val.item}}({{val.price}})
+            <input type="checkbox" @click="choise(val,index)">
+        </li>
+    </ul>
+
+    <div>订单费用信息</div>
+    <ul>
+        <li v-for="val in arr1">
+            {{val.item}}({{val.price}})
+        </li>
+    </ul>
+    <span>总金额:</span> {{count}}
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            sum:0,
+            show:false,
+            arr:[{
+                item:'沙发',
+                price:100,
+                flag:false
+            },{
+                item:'床',
+                price:200,
+                flag:false
+            },{
+                item:'wifi',
+                price:20,
+                flag:false
+            }],
+            arr1:[{
+                item:'群力花园豪华型',
+                price:400
+            },{
+                item:'车位',
+                price:200
+            }]
+        },
+        methods:{
+            choise(val,index){
+                this.arr[index].flag = !this.arr[index].flag;
+
+                if(this.arr[index].flag){
+                    this.arr1.push(val);
+                }else{
+                    this.arr1.forEach((elem,index1)=>{
+                        if(elem.item==this.arr[index].item){
+                            this.arr1.splice(index1,1)
+                        }
+                    })
+                }
+            }
+        },
+        computed:{
+            count(){
+                let sum = 0;
+                this.arr1.forEach((elem)=>{
+                    sum += elem.price;
+                });
+                return sum;
+            }
+        }
+
+    })
+</script>
+</body>
+</html>
