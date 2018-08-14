@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="count++">Add</button>
+    <button @click="destory">Desstory</button>
+    {{count}}
+    <input type="text" id="ipt">
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            count:0,
+            timer:null
+        },
+        methods:{
+            destory(){
+                this.$destroy();
+            }
+        },
+        beforeCreate(){
+            console.log('beforeCreate');
+        },
+        created(){       //此时未加载DOM元素
+            console.log('created');
+            this.timer=setInterval(()=>{  //正常情况下destory该vue不会清除此处定时器
+                this.count++;
+                console.log(111);
+            },1000)
+        },
+        beforeMount(){
+            console.log('beforeMount');
+        },
+        mounted(){
+            console.log('mounted');
+            document.getElementById('ipt').focus();
+        },
+        beforeUpdate(){
+            console.log('beforeUpdate');
+        },
+        updated(){
+            console.log('updated');
+        },
+        beforeDestory(){
+            console.log('beforeDestory');
+        },
+        destroyed(){
+            console.log('destroyed');
+            clearInterval(this.timer);
+        }
+
+
+
+    })
+</script>
+
+</body>
+</html>
