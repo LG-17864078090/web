@@ -8,10 +8,13 @@
       <!--<router-link to="/mine/test2">子路由2</router-link> |-->
       <router-link to="/home">重定向</router-link> |
       <router-link to="/home/wangwu/20">重定向参数</router-link> |
-      <router-link to="/othername">别名</router-link>
+      <router-link to="/othername">别名</router-link> |
+      <router-link to="/movie">电影列表</router-link>
 
     </div>
-    <router-view/>
+    <transition name="fade">
+        <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -33,4 +36,24 @@
     }
   }
 }
+
+  .fade-enter{
+    transform: translate(-100%);
+  }
+  .fade-enter-active{
+    transition: transform .5s linear;
+  }
+  .fade-enter-to{
+    transform: translate(0%);
+  }
+  /*.fade-leave{*/
+    /*opacity: 1;*/
+  /*}*/
+  /*.fade-leave-active{*/
+    /*transition:opacity 1s linear;*/
+  /*}*/
+  /*.fade-leave-to{*/
+    /*opacity: 0;*/
+  /*}*/
+
 </style>

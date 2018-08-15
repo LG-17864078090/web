@@ -7,9 +7,13 @@ import Test1 from './views/Test1.vue';
 import Test2 from './views/Test2.vue';
 import Test3 from './views/Test3.vue';
 import Test4 from './views/Test4.vue';
+import Error from './views/Error.vue';
+import Movie from './views/Movie.vue';
+import MovieDetail from './views/MovieDetail.vue';
+
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -52,6 +56,23 @@ export default new Router({
       {
           path:'/home/:name/:age',
           redirect:'/mine/test4/:name/:age'
+      },{
+          path:'*',
+          component:Error
+      },{
+          path:'/movie',
+          component:Movie
+      },{
+          path:'/movieDetail/:movieId',
+          component:MovieDetail
       }
   ],
+});
+
+export default router;
+
+// 全局守卫
+router.beforeEach((to,from,next)=> {
+    console.log(111);
+    next(true);
 });
