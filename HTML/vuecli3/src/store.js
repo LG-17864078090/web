@@ -2,10 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
   state: {
-    countData:10,
+      countData:10,
       msg:'this is vuex'
   },
   mutations: {
