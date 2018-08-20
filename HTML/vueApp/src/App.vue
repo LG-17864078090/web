@@ -53,6 +53,9 @@
 
 <style lang="scss">
   .center{
-    margin: 1rem 0;
+    position: relative;
+    top: 1rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
   }
 </style>

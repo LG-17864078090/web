@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
       backgroundColor:"rgb(33, 150, 243)",
       title:'Movie',
+      index:0
   },
   mutations: {
       changeMenu(state,menu){

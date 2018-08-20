@@ -1,6 +1,6 @@
 <template>
    <div class="music">
-       <aplayer :music="musicList[0]" :list="musicList" theme="deepPink" v-if="isShow">
+       <aplayer :music="musicList[0]" :showLrc="true" :list="musicList" theme="deepPink" v-if="isShow">
 
        </aplayer>
    </div>
@@ -29,14 +29,12 @@
                         obj.src = elem.src;
                         obj.artist = elem.author;
                         obj.pic = elem.musicImgSrc;
-                        obj.lrc = elem.lrc;
+                        obj.lrc = 'http://localhost:8080/'+elem.lrc;
                         this.musicList.push(obj);
                     });
                     this.isShow=true;
                 })
         }
-
-
     }
 </script>
 

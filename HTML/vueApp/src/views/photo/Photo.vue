@@ -1,14 +1,11 @@
 <template>
     <div class="photo">
-        图片
+        <router-view></router-view>
     </div>
-
 </template>
 
 <script>
-    export default {
-        name: "Photo"
-    }
+
 </script>
 
 <style scoped>

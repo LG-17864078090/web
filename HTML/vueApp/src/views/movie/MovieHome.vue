@@ -30,7 +30,7 @@
         },
         methods:{
             getData(){
-                Axios.get('/movie.json')
+                Axios.get('/data/movie.json')
                     .then((res)=>{
                         var tempArr = res.data.subjects.slice(this.movieList.length,this.movieList.length+5);
                         this.movieList = [...this.movieList,...tempArr];
@@ -41,7 +41,8 @@
                     })
             },
             getDetail(movie){
-                this.$router.push('/movie/movieDetail/'+movie.id);
+                // this.$router.push('/movie/moviedetail/'+movie.id);
+                this.$router.push('/movie/moviedetail/'+movie.id);
             }
         },
         created(){
@@ -56,9 +57,10 @@
                         this.getData();
                     },1000)
                 }
-
             }
-
+        },
+        destroyed(){
+            // window.onscroll = null;
         }
     }
 </script>
