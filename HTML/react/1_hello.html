@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+
+
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+
+
+    <script type="text/babel">
+
+        //jsx
+        ReactDOM.render(  //两个参数，把参数1放到参数2的DOM里
+            <div>
+                <h1>hello world</h1>
+                <p>I am react</p>
+            </div>,
+            document.getElementById('root')
+        );
+
+    </script>
+
+</body>
+</html>

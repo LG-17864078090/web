@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+        class Welcome extends React.Component{
+            constructor(props){
+                super(props);
+                this.xx='weichuang';
+            }
+            render(){
+                // console.log(this.props); //此时prop为属性，调用需要加this
+                return (
+                    <div>
+                        <h1>{this.props.name}</h1>
+                        <p>{this.props.description}  {this.props.children}</p>
+                        <p>{this.xx}</p>
+                    </div>
+                );
+
+            }
+        }
+
+        ReactDOM.render(
+            <Welcome name="唯创" description="省内最牛">666</Welcome>,
+            document.getElementById('root')
+        )
+
+    </script>
+
+</body>
+</html>
