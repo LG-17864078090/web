@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="root"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+        class Main extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    msg:'商品列表',
+                    detail:'无'
+                }
+            }
+
+            //自己改变自己
+            changeSelf(event){
+                console.log(event.target);
+                // event.target.innerHTML='已点击';
+                this.setState({
+                    msg:'商品列表（已点击）'
+                })
+            }
+
+            //子组件改变父组件
+            change(xx){
+                this.setState({
+                    detail:xx
+                })
+            }
+            render(){
+                return (
+                    <div>
+                        <h1 onClick={this.changeSelf.bind(this)}>{this.state.msg}</h1>
+                        <Product name="上衣" myClick={this.change.bind(this)}></Product>
+                        <Product name="外套" myClick={this.change.bind(this)}></Product>
+                        <Product name="鞋" myClick={this.change.bind(this)}></Product>
+                        <h2>{this.state.detail}</h2>
+                    </div>
+                )
+            }
+        }
+        class Product extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return (
+                    <div onClick={()=>{this.props.myClick(this.props.name)}}>{this.props.name}</div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Main></Main>,
+            document.getElementById('root')
+        )
+    </script>
+
+</body>
+</html>

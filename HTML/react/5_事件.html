@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+        class Welcome extends React.Component{
+            constructor(){
+                super();
+            }
+            click(num,event){
+                //事件DOM元素获取
+                // console.log(num,event.target);
+                // event.target.style.background = 'red';
+
+                //ref获取DOM元素
+                console.log(this.refs.btn);
+                console.log(this.refs.h);
+            }
+
+
+            click1(num,event){
+                console.log(event.target);
+                console.log(num);
+
+            }
+
+            //<!--两种事件传参-->
+            render(){
+                return (
+                    <div>
+                        <button onClick={this.click.bind(this,123)} ref="btn">click1</button>
+                        <button onClick={(event)=>{this.click1(12,event)}}>click2</button>
+                        <h1 ref="h">唯创</h1>
+                    </div>
+                );
+
+            }
+
+        }
+        ReactDOM.render(
+            <Welcome></Welcome>,
+            document.getElementById('root')
+        )
+    </script>
+
+</body>
+</html>

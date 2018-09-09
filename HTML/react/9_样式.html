@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .a{
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+        class Show extends React.Component{
+            constructor(){
+                super();
+            }
+            render(){
+                let style = {
+                    background:"deepPink",
+                    color:'white'
+                };
+                return (
+                    <div>
+                        <h1 className="a">Hello</h1>
+                        <p style={style}>Wei Chuang</p>
+                    </div>
+                )
+            }
+        }
+
+
+        ReactDOM.render(
+            <Show></Show>,
+            document.getElementById('root')
+        )
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .wrapper{
+            width: 800px;
+            margin: 0 auto;
+            border: 1px solid black;
+            padding: 20px 50px;
+        }
+        .title{
+            text-align: center;
+        }
+        .itemList{
+            padding: 0 10px;
+            background: #FFF38F;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #cccccc;
+            border-bottom: 0px;
+        }
+        .lastItem{
+            padding: 0 10px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #cccccc;
+        }
+        .del{
+            float: right;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .itemName{
+            margin: 0 8px;
+        }
+        .saveContainer{
+            height: 60px;
+            line-height: 60px;
+        }
+        .saveContainer input{
+            height: 25px;
+        }
+        .save{
+            padding: 5px 10px;
+            background: #00ff00;
+            float: right;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+</div>
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="browser.min.js"></script>
+<script type="text/babel">
+    class Main extends React.Component{
+        constructor(){
+            super();
+            this.state={
+                list:[
+                    {
+                        name:'吃饭',
+                        isChecked:false
+                    },
+                    {
+                        name:'睡觉',
+                        isChecked:false
+                    },
+                    {
+                        name:'code',
+                        isChecked:false
+                    }
+                ],
+                count:0
+            }
+        }
+
+        //添加列表条目
+        add(addItem){
+            let tempArr = this.state.list;
+            tempArr.push({name:addItem,isChecked:false});
+            this.setState({
+                list:tempArr
+            })
+        }
+
+        //删除列表条目
+        del(index){
+            let tempArr = this.state.list;
+            tempArr.splice(index,1);
+            this.setState({
+                list:tempArr
+            });
+            console.log(this.state.list);
+            this.changeCount();
+        }
+
+
+        //改变数组中被选中 isChecked 状态
+        changeCheck(index){
+            let tempArr = this.state.list;
+            tempArr[index].isChecked=!tempArr[index].isChecked;
+            this.setState({
+                list:tempArr,
+            });
+            this.changeCount();
+        }
+
+        //改变已完成数量函数
+        changeCount(){
+
+            let count=0;
+            for(let i=0;i<this.state.list.length;i++){
+                if(this.state.list[i].isChecked){
+                    count++;
+                }
+            }
+            this.setState({
+                count:count
+            });
+        }
+
+        render(){
+            return (
+                <div className="wrapper">
+                    <h1 className="title">TodoList</h1>
+                    <Save myClick={this.add.bind(this)}></Save>
+                    <List list={this.state.list} myClick={this.del.bind(this)} myCheck={this.changeCheck.bind(this)} count={this.state.count}></List>
+                </div>
+            )
+        }
+    }
+    class List extends React.Component{
+        constructor(props){
+            super(props);
+        }
+        show(){
+            console.log(this.props.list)
+        }
+        render(){
+            return (
+                <ul>
+                    {
+                        this.props.list.map((elem,index)=>{
+                            return <li className="itemList">
+                                <input type="checkbox" checked={this.props.list.isChecked}  onClick={()=>{this.props.myCheck(index)}}/>
+                                <span className="itemName">{elem.name}</span>
+                                <button className="del" onClick={()=>{this.props.myClick(index)}}>删除</button>
+                                <button onClick={this.show.bind(this)}>show</button>
+                            </li>
+                        })
+                    }
+                    <li className="lastItem">{this.props.count}已完成/{this.props.list.length}全部</li>
+                </ul>
+            )
+        }
+    }
+
+    class Save extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        render(){
+            return (
+                <div className="saveContainer">
+                    <span>任务 : </span>
+                    <input type="text" defaultValue='请添加任务吧' ref="myText"/>
+                    <button className="save" onClick={()=>{this.props.myClick(this.refs.myText.value)}}>保存任务</button>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(
+        <Main></Main>,
+        document.getElementById('root')
+    )
+</script>
+
+</body>
+</html>

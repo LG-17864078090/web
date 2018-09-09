@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+        class Show extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    isShow:true
+                }
+            }
+            change(){
+                this.setState({
+                    isShow: !this.state.isShow
+                })
+            }
+            render(){
+
+                //if判断与三元运算符
+                let temp = null;
+                if(this.state.isShow){
+                    temp = <h1>show</h1>
+                }
+
+
+                return (
+                    <div>
+                        <button onClick={this.change.bind(this)}>click</button>
+                        {temp}
+
+
+                        {
+                            this.state.isShow?
+                            <h1>show</h1>
+                            :null
+                        }
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Show></Show>,
+            document.getElementById('root')
+        )
+
+
+</script>
+
+</body>
+</html>

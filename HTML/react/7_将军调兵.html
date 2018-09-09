@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="root"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+        class Main extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    count:100,
+                }
+            }
+
+            changeSoldier(temp){
+                this.setState({
+                    count:this.state.count-temp,
+                });
+            }
+
+            render(){
+                return (
+                    <div>
+                        <p>全部士兵数量：{this.state.count}</p>
+                        <Item myClick={this.changeSoldier.bind(this)} value={10} num={100} count={this.state.count}></Item>
+                        <Item myClick={this.changeSoldier.bind(this)} value={20} num={90} count={this.state.count}></Item>
+                    </div>
+                )
+            }
+        }
+        class Item extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    count:this.props.num
+                }
+            }
+            changeSelf(temp){
+                if(this.props.count>=temp){
+                    this.setState({
+                        count:this.state.count+temp
+                    });
+                    this.props.myClick(temp);
+                }else{
+                    alert('士兵数量不足')
+                }
+
+
+            }
+            render(){
+                return (
+                    <div>
+                        <p>该将军拥有士兵：{this.state.count}</p>
+                        <button onClick={this.changeSelf.bind(this,this.props.value)}>调兵</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Main></Main>,
+            document.getElementById('root')
+        )
+    </script>
+</body>
+</html>
