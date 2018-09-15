@@ -28,6 +28,11 @@
             border: 1px solid #cccccc;
             border-bottom: 0px;
         }
+        .checkedLiStyle{
+            background: #00b262;
+            text-decoration: line-through;
+
+        }
         .lastItem{
             padding: 0 10px;
             height: 40px;
@@ -58,6 +63,7 @@
             top: 50%;
             transform: translateY(-50%);
         }
+
     </style>
 </head>
 <body>
@@ -91,21 +97,26 @@
 
         //添加列表条目
         add(addItem){
-            let flag = true;
-            for(var i =0; i<this.state.list.length;i++){
-                if(this.state.list[i].name==addItem){
-                    flag = false;
+            if(addItem){
+                let flag = true;
+                for(var i =0; i<this.state.list.length;i++){
+                    if(this.state.list[i].name==addItem){
+                        flag = false;
+                    }
                 }
-            }
-            if(flag){
-                let tempArr = this.state.list;
-                tempArr.push({name:addItem,isChecked:false});
-                this.setState({
-                    list:tempArr
-                })
+                if(flag){
+                    let tempArr = this.state.list;
+                    tempArr.push({name:addItem,isChecked:false});
+                    this.setState({
+                        list:tempArr
+                    })
+                }else{
+                    alert('该任务已存在')
+                }
             }else{
-                alert('该任务已存在')
+                alert('项目不能为空')
             }
+
         }
 
         //删除列表条目
@@ -163,11 +174,20 @@
                 <ul>
                     {
                         this.props.list.map((elem,index)=>{
-                            return <li className="itemList" key={elem.name}>
-                                <input type="checkbox" checked={this.props.list.isChecked}  onClick={()=>{this.props.myCheck(index)}}/>
-                                <span className="itemName">{elem.name}</span>
-                                <button className="del" onClick={()=>{this.props.myClick(index)}}>删除</button>
-                            </li>
+                            if(elem.isChecked){
+                                return <li className="itemList checkedLiStyle" key={elem.name}>
+                                    <input type="checkbox" checked={this.props.list.isChecked}  onClick={()=>{this.props.myCheck(index)}}/>
+                                    <span className="itemName"> {elem.name}&nbsp;</span>
+                                    <button className="del" onClick={()=>{this.props.myClick(index)}}>删除</button>
+                                </li>
+                            }else{
+                                return <li className="itemList" key={elem.name}>
+                                    <input type="checkbox" checked={this.props.list.isChecked}  onClick={()=>{this.props.myCheck(index)}}/>
+                                    <span className="itemName"> {elem.name}&nbsp;</span>
+                                    <button className="del" onClick={()=>{this.props.myClick(index)}}>删除</button>
+                                </li>
+                            }
+
                         })
                     }
                     <li className="lastItem">{this.props.count}已完成/{this.props.list.length}全部</li>
@@ -185,6 +205,7 @@
         }
         save(){
             this.props.myClick(this.refs.myText.value);
+            this.refs.myText.value='';
         }
 
         render(){

@@ -51,9 +51,12 @@
             constructor(props){
                 super(props);
             }
+            change(xx){
+                this.props.myClick(xx);
+            }
             render(){
                 return (
-                    <div onClick={()=>{this.props.myClick(this.props.name)}}>{this.props.name}</div>
+                    <div onClick={this.change.bind(this,this.props.name)}>{this.props.name}</div>
                 )
             }
         }
