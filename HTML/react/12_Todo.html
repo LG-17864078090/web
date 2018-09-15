@@ -91,11 +91,21 @@
 
         //添加列表条目
         add(addItem){
-            let tempArr = this.state.list;
-            tempArr.push({name:addItem,isChecked:false});
-            this.setState({
-                list:tempArr
-            })
+            let flag = true;
+            for(var i =0; i<this.state.list.length;i++){
+                if(this.state.list[i].name==addItem){
+                    flag = false;
+                }
+            }
+            if(flag){
+                let tempArr = this.state.list;
+                tempArr.push({name:addItem,isChecked:false});
+                this.setState({
+                    list:tempArr
+                })
+            }else{
+                alert('该任务已存在')
+            }
         }
 
         //删除列表条目
@@ -105,7 +115,6 @@
             this.setState({
                 list:tempArr
             });
-            console.log(this.state.list);
             this.changeCount();
         }
 
@@ -148,19 +157,16 @@
         constructor(props){
             super(props);
         }
-        show(){
-            console.log(this.props.list)
-        }
+
         render(){
             return (
                 <ul>
                     {
                         this.props.list.map((elem,index)=>{
-                            return <li className="itemList">
+                            return <li className="itemList" key={elem.name}>
                                 <input type="checkbox" checked={this.props.list.isChecked}  onClick={()=>{this.props.myCheck(index)}}/>
                                 <span className="itemName">{elem.name}</span>
                                 <button className="del" onClick={()=>{this.props.myClick(index)}}>删除</button>
-                                <button onClick={this.show.bind(this)}>show</button>
                             </li>
                         })
                     }
@@ -173,6 +179,12 @@
     class Save extends React.Component{
         constructor(props){
             super(props);
+            this.state={
+                showMsg:'请添加任务吧'
+            }
+        }
+        save(){
+            this.props.myClick(this.refs.myText.value);
         }
 
         render(){
@@ -180,7 +192,7 @@
                 <div className="saveContainer">
                     <span>任务 : </span>
                     <input type="text" defaultValue='请添加任务吧' ref="myText"/>
-                    <button className="save" onClick={()=>{this.props.myClick(this.refs.myText.value)}}>保存任务</button>
+                    <button className="save" onClick={this.save.bind(this)}>保存任务</button>
                 </div>
             )
         }
