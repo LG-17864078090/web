@@ -5,7 +5,9 @@ const count = (state=0,action)=>{
     console.log(state,action);
     switch (action.type){
         case'ADD':
-            return state+1;
+            return state+action.payload;
+        case'SUB':
+            return state-action.payload;
         default:
             return state;
     }
