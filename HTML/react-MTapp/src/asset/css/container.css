@@ -1,0 +1,11 @@
+.container{
+    background: #ffffff;
+}
+.con-title{
+    border-top: 1px solid #ddd8ce;
+    border-bottom: 1px solid #ddd8ce;
+    padding: .1rem .2rem ;
+}
+.con-content{
+    padding: .1rem 0;
+}

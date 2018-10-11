@@ -1,0 +1,10 @@
+.am-navbar-left, .am-navbar-right{
+    flex: none;
+}
+.am-search{
+    width:100%;
+    background-color:transparent;
+}
+.am-search-cancel{
+    color:#fff;
+}

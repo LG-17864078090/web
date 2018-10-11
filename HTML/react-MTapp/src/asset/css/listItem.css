@@ -1,0 +1,32 @@
+.list-container{
+    padding: .1rem .2rem;
+    display: flex;
+    height: 1.2rem;
+    align-items: center;
+    border-bottom: 1px solid #ddd8ce;
+}
+.list-img{
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: .2rem;
+}
+.list-img img{
+    width: 100%;
+    height: 100%;
+}
+.list-detail{
+    flex: 1;
+}
+.list-title{
+    font-size: 16px;
+    font-weight: 600;
+
+}
+.list-online-price{
+    color: #00b262;
+    font-size: 15px;
+    font-weight: 600;
+}
+.list-sold{
+    float: right;
+}
