@@ -67,6 +67,7 @@
             </table>
             <input type="text" v-model="callSwapPage">
             <button @click="FIFO">SWAP</button>
+            <h4 class="pageFaultRate">缺页率: {{this.inSwap}} / {{this.inSwap+this.inMemory}}</h4>
         </div>
 
         <div class="memory">
@@ -109,16 +110,19 @@
     var vm = new Vue({
         el:'#app',
         data:{
-            processName:'',
-            processSize:'',
-            callSwapPage:'',
-            physicalMemory:3,
-            ready:[],
-            blocked:[],
-            running:[],
-            memory:[],
-            swapSpace:[]
+            processName:'',//进程名称
+            processSize:'',//进程大小
+            callSwapPage:'',//物理地址
+            inMemory:0,//记录所访问块在内存次数
+            inSwap:0,//记录所访问块在交换空间次数
+            physicalMemory:3,//可用内存块大小
+            ready:[],//就绪队列
+            blocked:[],//阻塞队列
+            running:[],//运行队列
+            memory:[],//内存位示图
+            swapSpace:[]//交换空间位示图
         },
+        //钩子函数
         created(){
             this.creatMap();
             this.creatSwapSpace();
@@ -151,51 +155,54 @@
 
             //进程存入内存与交换空间
             saveToMemory(PCB,memoryMap,swapSpaceMap,physicalMemory){
-                //计算块数
-                let pageCount = Math.ceil(PCB.size/1024);
-                if(pageCount<physicalMemory){
-                    for(let i=0;i<pageCount;i++){
-                        for(let j=0;j<64;j++){
-                            if(memoryMap[j]==0){
-                                memoryMap[j]=11;
-                                let PageTemp = new PAGE(i,j,-1,1);
-                                PCB.page[i]=PageTemp;
-                                j=64;
+                if(PCB.page.length==0){
+                    //计算进程所需内存块数
+                    let pageCount = Math.ceil(PCB.size/1024);
+                    if(pageCount<physicalMemory){
+                        //小于三块直接存入内存
+                        for(let i=0;i<pageCount;i++){
+                            for(let j=0;j<64;j++){
+                                if(memoryMap[j]==0){
+                                    memoryMap[j]=11;
+                                    let PageTemp = new PAGE(i,j,-1,1);
+                                    PCB.page[i]=PageTemp;
+                                    j=64;
+                                }
                             }
                         }
-                    }
-                }else{
-                    //前三位存进物理内存
-                    for(let i=0;i<physicalMemory;i++){
-                        for(let j=0;j<64;j++){
-                            if(memoryMap[j]==0){
-                                memoryMap[j]=11;
-                                let PageTemp = new PAGE(i,j,-1,1);
-                                PCB.page[i]=PageTemp;
-                                j=64;
+                    }else{
+                        //大于三块前三位存进物理内存
+                        for(let i=0;i<physicalMemory;i++){
+                            for(let j=0;j<64;j++){
+                                if(memoryMap[j]==0){
+                                    memoryMap[j]=11;
+                                    let PageTemp = new PAGE(i,j,-1,1);
+                                    PCB.page[i]=PageTemp;
+                                    j=64;
+                                }
                             }
                         }
-                    }
-
-                    //后面的存入交换空间
-                    for(let i=physicalMemory;i<pageCount;i++){
-                        for(let j=0;j<128;j++){
-                            if(swapSpaceMap[j]==0){
-                                swapSpaceMap[j]=11;
-                                let PageTemp = new PAGE(i,-1,j,0);
-                                PCB.page[i]=PageTemp;
-                                j=128;
+                        //后面的存入交换空间
+                        for(let i=physicalMemory;i<pageCount;i++){
+                            for(let j=0;j<128;j++){
+                                if(swapSpaceMap[j]==0){
+                                    swapSpaceMap[j]=11;
+                                    let PageTemp = new PAGE(i,-1,j,0);
+                                    PCB.page[i]=PageTemp;
+                                    j=128;
+                                }
                             }
                         }
                     }
                 }
 
+
             },
 
             //内存与交换空间释放
             releaseMemory(PCB,memoryMap,swapSpaceMap,physicalMemory){
-                let pageNum = PCB.page.length;
-                if(pageNum<physicalMemory){
+                let pageCount = PCB.page.length;
+                if(pageCount<physicalMemory){
                     for(let i=0;i<PCB.page.length;i++){
                         memoryMap[PCB.page[i].piece]=0;
                     }
@@ -204,12 +211,19 @@
                     for(let i=0;i<physicalMemory;i++){
                         memoryMap[PCB.page[i].piece]=0;
                     }
-                    for(let i=physicalMemory;i<pageNum;i++) {
+                    for(let i=physicalMemory;i<pageCount;i++) {
                         swapSpaceMap[PCB.page[i].swap]=0;
                     }
                     PCB.page=[];
                 }
 
+            },
+
+            //重置缺页率
+            resetPageFaultRate(){
+                this.inSwap=0;
+                this.inMemory=0;
+                this.callSwapPage='';
             },
 
             //(先进先出FIFO算法)内存与交换空间交换内容
@@ -218,16 +232,16 @@
                     let callSwapPageIndex=0;
                     for(let i=0;i<this.running[0].page.length;i++){
                         if(this.running[0].page[i].page==Math.floor(this.callSwapPage*1/1024)){
-                            callSwapPageIndex=i;
+                            callSwapPageIndex=i;//获取所输入逻辑地址对应的物理地址块在页表数组中的下标
                         }
                     }
 
                     if(callSwapPageIndex>=this.physicalMemory){
                         let tempArr = this.running[0].page;
                         this.running[0].page=[];
-                        console.log(tempArr);
-                        let tempPage1=tempArr[0];
-                        let tempPage2=tempArr[callSwapPageIndex];
+
+                        let tempPage1=tempArr[0];//最先进入内存的页
+                        let tempPage2=tempArr[callSwapPageIndex];//需要进入内存的页
 
                         tempArr[0]=new PAGE(tempArr[0].page,tempPage2.piece,tempPage2.swap,tempPage2.exist);
                         tempArr[callSwapPageIndex]=new PAGE(tempArr[callSwapPageIndex].page,tempPage1.piece,tempPage1.swap,tempPage1.exist);
@@ -244,6 +258,9 @@
                         this.running[0].page=tempArr;
                         tempArr=[];
 
+                        this.inSwap++;
+                    }else if(callSwapPageIndex>=0||callSwapPageIndex<this.physicalMemory){
+                        this.inMemory++;
                     }
 
                 }else{
@@ -253,14 +270,12 @@
             },
 
 
-
-
             //创建进程
             creat(){
                if(this.processName){
                    let flag=this.findProcess(this.ready,this.processName)&&this.findProcess(this.blocked,this.processName)&&this.findProcess(this.running,this.processName);
                    if (flag) {
-                       var PCBTemp = new PCB(this.processName,this.processSize*1);
+                       let PCBTemp = new PCB(this.processName,this.processSize*1);
                        this.ready.push(PCBTemp);
                        this.processName = '';
                        this.processSize = '';
@@ -269,6 +284,7 @@
                            this.saveToMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
                            this.ready.splice(0,1);
                        }
+                       this.resetPageFaultRate();
                    }else{
                        alert('该名称的进程已存在！')
                    }
@@ -282,27 +298,28 @@
             timeUp() {
                 if(this.running.length!=0){
                     this.ready.push(this.running[0]);
-                    this.releaseMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
+                    //this.releaseMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
                     this.running[0] = this.ready[0];
                     this.saveToMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
                     this.ready.splice(0, 1);
+                    this.resetPageFaultRate();
                 }
             },
 
             //进程阻塞
             block(){
-
-                    this.blocked.push(this.running[0]);
-                    this.releaseMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
-                    //判断就绪队列是否还有进程
-                    if(this.ready.length!=0){
-                        this.running[0]=this.ready[0];
-                        this.saveToMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
-                        this.ready.splice(0,1);
-                    }else{
-                        this.running.splice(0,1);
-                        alert("无就绪进程,该操作会使CPU空闲")
-                    }
+                this.blocked.push(this.running[0]);
+                //this.releaseMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
+                //判断就绪队列是否还有进程
+                if(this.ready.length!=0){
+                    this.running[0]=this.ready[0];
+                    this.saveToMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
+                    this.ready.splice(0,1);
+                }else{
+                    this.running.splice(0,1);
+                    alert("无就绪进程,该操作会使CPU空闲")
+                }
+                this.resetPageFaultRate();
             },
 
             //唤醒进程
@@ -312,13 +329,13 @@
                     alert('该进程不在阻塞队列,无法唤醒')
                 }else{
                     let tempIndex;
-                    for(var index=0;index<this.blocked.length;index++){
+                    for(let index=0;index<this.blocked.length;index++){
                         if(this.processName==this.blocked[index].name){
                             tempIndex=index;
                         }
                     }
                     this.ready.push(this.blocked[tempIndex]);
-                    this.blocked.splice(0,1);
+                    this.blocked.splice(tempIndex,1);
                     this.processName = '';
                     this.processSize = '';
 
@@ -327,6 +344,7 @@
                         this.running.push(this.ready[0]);
                         this.saveToMemory(this.running[0],this.memory,this.swapSpace,this.physicalMemory);
                         this.ready.splice(0,1);
+                        this.resetPageFaultRate();
                     }
                }
             },
@@ -343,6 +361,7 @@
                         this.running.splice(0,1);
                         alert("无就绪进程,该操作会使CPU空闲")
                     }
+                    this.resetPageFaultRate();
                 }else{
                     alert("无运行进程")
                 }
