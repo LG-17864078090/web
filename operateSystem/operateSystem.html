@@ -427,10 +427,16 @@
             delDevice(){
                 let flag = this.findDCCById(this.DCCid,this.device);
                 if(flag){
+                    let tmpIndex=0;
                     for(let i=0;i<this.device.length;i++){
                         if(this.device[i].id==this.DCCid){
-                            this.device.splice(i,1);
+                            tmpIndex=i;
                         }
+                    }
+                    if(this.device[tmpIndex].isFree){
+                        this.device.splice(tmpIndex,1);
+                    }else{
+                        alert('设备占用，不可删除')
                     }
                 }else{
                     alert('该设备ID不存在');
@@ -542,6 +548,8 @@
                         }else{
                             alert(this.device[tmpIndex].id+'已被占用，已将进程'+this.running[0].name+'插入改设备等待队列');
                             this.device[tmpIndex].waiting.push(this.running[0]);
+                            this.block();
+
                         }
                     }else{
                         alert("该设备ID不存在")
@@ -567,6 +575,9 @@
                             let PCBName = this.device[tmpIndex].process;
                             if(this.device[tmpIndex].waiting.length){
                                 this.device[tmpIndex].process=this.device[tmpIndex].waiting[0].name;
+                                this.processName = this.device[tmpIndex].waiting[0].name;
+                                this.weakUp();
+                                this.processName='';
                                 let tmpProcess = this.device[tmpIndex].waiting[0];
                                 this.device[tmpIndex].waiting.splice(0,1);
                                 this.requestControl(tmpProcess,this.device[tmpIndex].control);
@@ -599,6 +610,7 @@
                 }else{
                     alert(Control.id+'已被占用，已将进程'+PCB.name+'加入该控制器的等待队列');
                     Control.waiting.push(PCB);
+                    this.block();
                 }
             },
 
@@ -608,6 +620,9 @@
                     PCBName=Control.process;
                     if(Control.waiting.length){
                         Control.process=Control.waiting[0].name;
+                        this.processName = Control.waiting[0].name;
+                        this.weakUp();
+                        this.processName='';
                         let tmpProcess=Control.waiting[0];
                         Control.waiting.splice(0,1);
                         this.requestChannel(tmpProcess,Control.channel);
@@ -628,11 +643,13 @@
                     Channel.isFree=false;
                     Channel.process=PCB.name;
                     alert('成功申请'+Channel.id);
+                    this.block();
                 }else if(Channel.process==PCB.name){
                     alert(Channel.id+'正在被进程'+PCB.name+'使用');
                 }else{
                     alert(Channel.id+'已被占用，已将进程'+PCB.name+'加入该通道的等待队列');
                     Channel.waiting.push(PCB);
+                    this.block();
                 }
             },
 
@@ -641,17 +658,19 @@
                 if(Channel.process==PCBName){
                     if(Channel.waiting.length){
                         Channel.process=Channel.waiting[0].name;
-                        Channel.waiting.splice(0,1);
+                        this.processName = Channel.waiting[0].name;
+                        this.weakUp();
+                        this.processName='';
+
                     }else{
                         Channel.isFree=true;
                         Channel.process='';
                         alert('进程'+PCBName+'已释放'+Channel.id);
                     }
-
+                    Channel.waiting.splice(0,1);
                 }else{
                     alert('运行进程未占用'+Channel.id);
                 }
-
             },
 
             //创建进程
