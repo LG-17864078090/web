@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="operateSystem.css">
+    <title>操作系统</title>
+    <link rel="stylesheet" href="css/operateSystem.css">
 </head>
 <body>
 <div id="app" class="wrapper">
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="showMemoryDetail">
-        <button @click=(memoryIsShow=!memoryIsShow)>位示图</button>
+        <button @click=(memoryIsShow=!memoryIsShow) class="OFF_ON">位示图</button>
         <div class="pageExcel" v-if="memoryIsShow">
             <h3>页表</h3>
             <table>
@@ -87,7 +87,8 @@
         </div>
     </div>
     <div class="IOdevice">
-        <div class="showDevice">
+        <button @click=(deviceIsShow=!deviceIsShow) class="OFF_ON">设备</button>
+        <div class="showDevice" v-if="deviceIsShow">
             <div class="channel">
                 <li v-for="val in channel">
                     <h4 class="id">
@@ -103,7 +104,7 @@
 
                 </li>
             </div>
-            <div class="control">
+            <div class="control" >
                 <li v-for="val in control">
                     <h4 class="id">
                         {{val.id}}
@@ -133,8 +134,8 @@
                     </div>
                 </li>
             </div>
-        </div>
-        <div class="oprateDevice">
+        </div >
+        <div class="oprateDevice"  v-if="deviceIsShow">
             <span>ID:</span><input type="text" v-model="DCCid">
             <span>上级:</span><input type="text" v-model="DCparent">
             <button @click="addChannel">添加通道</button>
@@ -145,9 +146,46 @@
             <button @click="delDevice">删除设备</button>
         </div>
     </div>
+    <div class="file">
+        <div class="outMemory">
+            <div class="outMemoryMap">
+                <h3>外存位示图</h3>
+                <span v-for="val in outMemory">{{val}}</span>
+            </div>
+            <div class="fileOperating">
+                <button @click="creatFolder">创建目录</button>
+                <button @click="creatFile">创建文件</button>
+            </div>
+        </div>
+        <div class="showFile">
+           <div class="fileFolder">
+               <img src="image/文件夹.png" alt="">
+               <h3>{{this.nowFOLDER.name}}</h3>
+               <h3>{{this.nowFOLDER.size}}</h3>
+               <h3 class="creatTime">{{this.nowFOLDER.creatTime}}</h3>
+               <img src="image/返回.png" class="back" alt="" @click="back">
+           </div>
+            <div class="fileList">
+                <div class="fileListItem" v-for="(folder,index) in nowFolders" @click="updateFileShow(folder)">
+                    <img src="image/文件夹.png" alt="">
+                    <span>{{folder.name}}</span>
+                    <span>{{folder.size}}</span>
+                    <span>{{folder.creatTime}}</span>
+                    <button @click="deleteFolder(folder,index)">删除</button>
+                </div>
+                <div class="fileListItem" v-for="(file,index) in nowFiles">
+                    <img src="image/文件.png" alt="">
+                    <span>{{file.name}}</span>
+                    <span>{{file.size}}</span>
+                    <span>{{file.creatTime}}</span>
+                    <button @click="deleteFile(file,index)">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="vue.js"></script>
+<script src="js/vue.js"></script>
 <script>
     //进程数据结构
     class PCB {
@@ -200,6 +238,30 @@
         }
     }
 
+    //文件数据结构
+    class FILE{
+        constructor(name,size,FOLDER,creatTime){
+            this.name = name;
+            this.size = size;
+            this.folder = FOLDER;
+            this.firstBlock='';
+            this.position = [];
+            this.creatTime = creatTime;
+        }
+    }
+
+    //文件夹数据结构
+    class FOLDER{
+        constructor(name,size,FOLDER,creatTime){
+            this.name = name;
+            this.size = size;
+            this.folder = FOLDER;
+            this.firstBlock='';
+            this.position = [];
+            this.creatTime = creatTime;
+        }
+    }
+
     var vm = new Vue({
         el:'#app',
         data:{
@@ -209,6 +271,7 @@
             DCparent:'',//设备通道父级ID
             callSwapPage:'',//物理地址
             memoryIsShow:false,//位示图显示开关
+            deviceIsShow:false,//设备显示开关
             inMemory:0,//记录所访问块在内存次数
             inSwap:0,//记录所访问块在交换空间次数
             physicalMemory:3,//可用内存块大小
@@ -217,17 +280,179 @@
             running:[],//运行队列
             memory:[],//内存位示图
             swapSpace:[],//交换空间位示图
+            outMemory:[],//外存位示图
             channel:[],//通道
             control:[],//控制器
-            device:[]//设备
+            device:[],//设备
+            files:[],//文件
+            folders:[],//文件夹
+            nowFOLDER:'',//当前父文件夹
+            nowFiles:[],//当前文件夹下的文件
+            nowFolders:[],//当前文件夹下的文件夹
         },
         //钩子函数
         created(){
             this.creatMap();
             this.creatSwapSpace();
+            this.creatOutMemory();
             this.creatDCC();
         },
         methods:{
+
+            //文件或者文件夹存入外存
+            saveToOutMemory(FileOrFolder){
+                let blockNum = Math.ceil(FileOrFolder.size/1024);
+                for(let i=0;i<blockNum;i++){
+                    for(let j=0;j<64;j++){
+                        if(this.outMemory[j]==0){
+                            this.outMemory[j]=11;
+                            FileOrFolder.position[i]=j;
+                            j=64;
+                        }
+                    }
+                }
+                FileOrFolder.firstBlock=FileOrFolder.position[0];
+            },
+
+            //删除文件或文件夹
+            delelteFromoOutMemory(FileOrFolder){
+                for(let i=0;i<FileOrFolder.position.length;i++){
+                   this.outMemory[FileOrFolder.position[i]]=0;
+                }
+            },
+
+
+            //创建文件
+            creatFile(){
+                let tmpFileName = prompt("请输入文件名称:",'');
+                let flag = true;
+                for(let i=0;i<this.nowFiles.length;i++){
+                    if(this.nowFiles[i].name == tmpFileName){
+                        flag = false;
+                    }
+                }
+                if(flag){
+                    let tmpFileSize = prompt("请输入文件大小",'');
+                    let tmpFile = new FILE(tmpFileName,tmpFileSize,this.nowFOLDER,this.getTime().toString());
+                    this.saveToOutMemory(tmpFile);
+                    this.nowFiles.push(tmpFile);
+                    this.files.push(tmpFile);
+                }else{
+                    alert('该目录下已存在'+tmpFileName+'文件');
+                }
+            },
+
+            //创建文件夹
+            creatFolder(){
+                let tmpFolderName = prompt("请输入文件夹名称:",'');
+                let flag = true;
+                for(let i=0;i<this.nowFolders.length;i++){
+                    if(this.nowFolders[i].name == tmpFolderName){
+                        flag = false;
+                    }
+                }
+                if(flag){
+                    let tmpFolderSize = prompt("请输入文件夹大小",'');
+                    let tmpFolder = new FOLDER(tmpFolderName,tmpFolderSize,this.nowFOLDER,this.getTime().toString());
+                    this.saveToOutMemory(tmpFolder);
+                    this.nowFolders.push(tmpFolder);
+                    this.folders.push(tmpFolder);
+                }else{
+                    alert('该目录下已存在'+tmpFileName+'文件夹');
+                }
+            },
+
+            //判断父文件夹是否存在  存在返回真
+            folderIsExist(FileOrFolder){
+                for(let i=0;i<this.folders.length;i++){
+                    if(FileOrFolder.folder == this.folders[i]){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            },
+
+            //删除文件夹及其下面内容
+            deleteFolder(folder,index){
+                this.nowFolders.splice(index,1);
+                //删除该文件夹
+                for(let i=0;i<this.folders.length;i++){
+                    if(this.folders[i].name==folder.name && this.folders[i].creatTime==folder.creatTime){
+                        this.delelteFromoOutMemory(this.folders[i]);
+                        this.folders.splice(i,1);
+                    }
+                }
+
+                //删除文件夹下的所有文件夹
+                for(let i=0;i<this.folders.length;i++){
+                    if(this.folders[i].name!="C" && !this.folderIsExist(this.folders[i])){
+                        this.delelteFromoOutMemory(this.folders[i]);
+                        this.folders.splice(i,1);
+                        i=i-1;
+                    }
+                }
+
+                //删除该文件夹下的所有文件
+                for(let i=0;i<this.files.length;i++){
+                    if(!this.folderIsExist(this.files[i])){
+                        this.delelteFromoOutMemory(this.files[i]);
+                        this.files.splice(i,1);
+                        i=i-1;
+                    }
+                }
+
+
+                //阻止事件冒泡
+                event.stopPropagation();
+            },
+
+            //删除文件
+            deleteFile(file,index){
+                this.nowFiles.splice(index,1);
+                for(let i=0;i<this.files.length;i++){
+                    if(this.files[i].name==file.name && this.files[i].creatTime==file.creatTime){
+                        this.delelteFromoOutMemory(this.files[i]);
+                        this.files.splice(i,1);
+                    }
+                }
+            },
+
+            //获取系统当前时间
+            getTime(){
+                let data = new Date();
+                return data.toLocaleString();
+                //2018/10/31 上午10:59:08
+            },
+
+            //文件夹返回上级
+            back(){
+                if(this.nowFOLDER.folder!=''){
+                    this.updateFileShow(this.nowFOLDER.folder);
+                }
+            },
+
+            //更新文件显示
+            updateFileShow(FOLDER){
+                this.nowFOLDER = '';
+                this.nowFolders=[];
+                this.nowFiles=[];
+                this.nowFOLDER = FOLDER;
+                for(let i=0;i<this.files.length;i++){
+                    if(this.files[i].folder.name == FOLDER.name && this.files[i].folder.creatTime == FOLDER.creatTime){
+                        this.nowFiles.push(this.files[i]);
+                    }
+                }
+                for(let i=0;i<this.folders.length;i++){
+                    if(this.folders[i].folder.name == FOLDER.name && this.folders[i].folder.creatTime == FOLDER.creatTime){
+                        this.nowFolders.push(this.folders[i]);
+                    }
+                }
+            },
+
+
+
+
             //判断进程输入框内容是否在某队列
             findProcess(arr,temp){
                 let flag = true;
@@ -264,18 +489,40 @@
                 }
             },
 
+            //生成随机外存
+            creatOutMemory(){
+                for(let i=0;i<64;i++){
+                    this.outMemory[i] = Math.floor(Math.random() * 2);
+                }
+                let C = new FOLDER('C',1000,'','2018/10/31 上午10:59:08');
+                let user = new FOLDER('user',1000,C,this.getTime().toString());
+                let test = new FILE('test',1000,C,this.getTime().toString());
+                let test1 = new FILE('test1',1100,user,this.getTime().toString());
+                this.saveToOutMemory(C);
+                this.saveToOutMemory(user);
+                this.saveToOutMemory(test);
+                this.saveToOutMemory(test1);
+
+                this.folders.push(C);
+                this.nowFOLDER=C;
+                this.folders.push(user);
+                this.files.push(test);
+                this.files.push(test1);
+                this.updateFileShow(C);
+            },
+
             //初始化设备，控制器，通道
             creatDCC(){
-                var channel_1 = new CHANNEL('通道1');
-                var channel_2 = new CHANNEL('通道2');
-                var control_1 = new CONTROL('控制器1',channel_1);
-                var control_2 = new CONTROL('控制器2',channel_1);
-                var control_3 = new CONTROL('控制器3',channel_2);
-                var device_1 = new DEVICE('设备1',control_1);
-                var device_2 = new DEVICE('设备2',control_1);
-                var device_3 = new DEVICE('设备3',control_2);
-                var device_4 = new DEVICE('设备4',control_2);
-                var device_5 = new DEVICE('设备5',control_3);
+                let channel_1 = new CHANNEL('通道1');
+                let channel_2 = new CHANNEL('通道2');
+                let control_1 = new CONTROL('控制器1',channel_1);
+                let control_2 = new CONTROL('控制器2',channel_1);
+                let control_3 = new CONTROL('控制器3',channel_2);
+                let device_1 = new DEVICE('设备1',control_1);
+                let device_2 = new DEVICE('设备2',control_1);
+                let device_3 = new DEVICE('设备3',control_2);
+                let device_4 = new DEVICE('设备4',control_2);
+                let device_5 = new DEVICE('设备5',control_3);
                 this.channel.push(channel_1);
                 this.channel.push(channel_2);
                 this.control.push(control_1);
