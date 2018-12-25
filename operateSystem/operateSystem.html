@@ -27,24 +27,30 @@
             <h2 class="msgTitle">队列信息</h2>
             <div class="showMsg-queue">
                 <div class="showMsg-ready">
-                    <h3>---就绪队列--- </h3>
+                    <h3>--就绪队列--</h3>
                     <li v-for="val in ready">
                         <span>{{val.name}}</span>
                         <span>size:{{val.size}}</span>
                     </li>
                 </div>
                 <div class="showMsg-blocked">
-                    <h3>---阻塞队列--- </h3>
+                    <h3>--阻塞队列--</h3>
                     <li v-for="val in blocked">
                         <span>{{val.name}}</span>
                         <span>size:{{val.size}}</span>
                     </li>
                 </div>
                 <div class="showMsg-running">
-                    <h3>---运行队列---</h3>
+                    <h3>--运行队列--</h3>
                     <li v-for="val in running">
                         <span>{{val.name}}</span>
                         <span>size:{{val.size}}</span>
+                    </li>
+                </div>
+                <div class="showMsg-finish">
+                    <h3>--完成队列--</h3>
+                    <li v-for="val in finish">
+                        <span>{{val.name}}</span>
                     </li>
                 </div>
             </div>
@@ -147,41 +153,73 @@
         </div>
     </div>
     <div class="file">
-        <div class="outMemory">
-            <div class="outMemoryMap">
-                <h3>外存位示图</h3>
-                <span v-for="val in outMemory">{{val}}</span>
+        <button @click=(fileIsShow=!fileIsShow) class="OFF_ON">位示图</button>
+        <div v-if="fileIsShow">
+            <div class="outMemory">
+                <div class="outMemoryMap">
+                    <h3>外存位示图</h3>
+                    <span v-for="val in outMemory">{{val}}</span>
+                </div>
+                <div class="fileOperating">
+                    <button @click="creatFolder">创建目录</button>
+                    <button @click="creatFile">创建文件</button>
+                </div>
             </div>
-            <div class="fileOperating">
-                <button @click="creatFolder">创建目录</button>
-                <button @click="creatFile">创建文件</button>
-            </div>
-        </div>
-        <div class="showFile">
-           <div class="fileFolder">
-               <img src="image/文件夹.png" alt="">
-               <h3>{{this.nowFOLDER.name}}</h3>
-               <h3>{{this.nowFOLDER.size}}</h3>
-               <h3 class="creatTime">{{this.nowFOLDER.creatTime}}</h3>
-               <img src="image/返回.png" class="back" alt="" @click="back">
-           </div>
-            <div class="fileList">
-                <div class="fileListItem" v-for="(folder,index) in nowFolders" @click="updateFileShow(folder)">
+            <div class="showFile">
+                <div class="fileFolder">
                     <img src="image/文件夹.png" alt="">
-                    <span>{{folder.name}}</span>
-                    <span>{{folder.size}}</span>
-                    <span>{{folder.creatTime}}</span>
-                    <button @click="deleteFolder(folder,index)">删除</button>
+                    <h3>{{this.nowFOLDER.name}}</h3>
+                    <h3>{{this.nowFOLDER.size}}</h3>
+                    <h3 class="creatTime">{{this.nowFOLDER.creatTime}}</h3>
+                    <img src="image/返回.png" class="back" alt="" @click="back">
                 </div>
-                <div class="fileListItem" v-for="(file,index) in nowFiles">
-                    <img src="image/文件.png" alt="">
-                    <span>{{file.name}}</span>
-                    <span>{{file.size}}</span>
-                    <span>{{file.creatTime}}</span>
-                    <button @click="deleteFile(file,index)">删除</button>
+                <div class="fileList">
+                    <div class="fileListItem" v-for="(folder,index) in nowFolders" @click="updateFileShow(folder)">
+                        <img src="image/文件夹.png" alt="">
+                        <span>{{folder.name}}</span>
+                        <span>{{folder.size}}</span>
+                        <span>{{folder.creatTime}}</span>
+                        <button @click="deleteFolder(folder,index)">删除</button>
+                    </div>
+                    <div class="fileListItem" v-for="(file,index) in nowFiles">
+                        <img src="image/文件.png" alt="">
+                        <span>{{file.name}}</span>
+                        <span>{{file.size}}</span>
+                        <span>{{file.creatTime}}</span>
+                        <button @click="deleteFile(file,index)">删除</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+    </div>
+
+    <div class="scheduling">
+        <div class="schedulingButton">
+            <button @click="FCFS">FCFS</button>
+            <button @click="SJF">SCF</button>
+            <button @click="timePiece">时间片调度</button>
+            <button @click="priority">优先级</button>
+        </div>
+
+        <div class="showTime">
+            <div class="item" v-for="val in finish">
+                <li>name：{{val.name}}</li>
+
+                <li>到达时间：{{val.arrival_time}}</li>
+                <li>服务时间：{{val.burst_time}}</li>
+                <li>结束时间：{{val.finished_time}}</li>
+                <li>周转时间：{{val.finished_time-val.arrival_time}}</li>
+                <li>带权周转：{{(val.finished_time-val.arrival_time)/val.burst_time}}</li>
+                <li>优先级：{{val.priority}}</li>
+            </div>
+        </div>
+        <div>
+            <p>平均周转时间：{{averageBurstTime}}</p>
+            <p>平均带权周转时间：{{averageBurstTimeWithWeight}}</p>
+        </div>
+
+
     </div>
 </div>
 
@@ -189,10 +227,15 @@
 <script>
     //进程数据结构
     class PCB {
-        constructor(name,size){
+        constructor(name,size,arrival_time,burst_time,priority){
             this.name=name;
             this.size=size;
             this.page=[];
+            this.arrival_time=arrival_time;		//到达时间
+            this.burst_time=burst_time;		//服务时间
+            this.remaing_time=burst_time;   //剩余服务时间
+            this.finished_time=0;         //完成时间
+            this.priority=priority;        //优先级
         }
     }
 
@@ -272,12 +315,15 @@
             callSwapPage:'',//物理地址
             memoryIsShow:false,//位示图显示开关
             deviceIsShow:false,//设备显示开关
+            fileIsShow:false,//文件显示开关
             inMemory:0,//记录所访问块在内存次数
             inSwap:0,//记录所访问块在交换空间次数
             physicalMemory:3,//可用内存块大小
             ready:[],//就绪队列
             blocked:[],//阻塞队列
             running:[],//运行队列
+            finish:[],//完成队列
+            allPCB:[],//全部进程
             memory:[],//内存位示图
             swapSpace:[],//交换空间位示图
             outMemory:[],//外存位示图
@@ -296,8 +342,157 @@
             this.creatSwapSpace();
             this.creatOutMemory();
             this.creatDCC();
+            this.addPCB();
+        },
+        computed:{     //计算属性
+            averageBurstTime(){
+                let sum = 0;
+                for(let i=0;i<this.finish.length;i++){
+                    sum+=this.finish[i].finished_time-this.finish[i].arrival_time;
+                }
+                return sum/this.finish.length;
+            },
+            averageBurstTimeWithWeight(){
+                let sum = 0;
+                for(let i=0;i<this.finish.length;i++){
+                    sum+=(this.finish[i].finished_time-this.finish[i].arrival_time)/this.finish[i].burst_time;
+                }
+                return sum/this.finish.length;
+            }
+
         },
         methods:{
+            addPCB(){
+                let PCBTemp1 = new PCB("A",11,12,2,3);
+                let PCBTemp2 = new PCB("B",22,6,5,1);
+                let PCBTemp3 = new PCB("C",33,8,4,2);
+                let PCBTemp4 = new PCB("D",44,4,7,4);
+                this.allPCB.push(PCBTemp1,PCBTemp2,PCBTemp3,PCBTemp4);
+            },
+
+            //调度————先来先服务
+            FCFS(){
+                this.running.splice(0);
+                this.finish.splice(0);
+                this.allPCB.sort(function (a,b) {
+                    return a.arrival_time-b.arrival_time;
+                });
+                for(let i=0;i<this.allPCB.length;i++){
+                    setTimeout(()=>{
+                        if(i==0){
+                            this.running.splice(0,0,this.allPCB[i]);
+                            this.allPCB[i].finished_time=this.allPCB[i].arrival_time+this.allPCB[i].burst_time;
+                        }else{
+                            this.running.splice(0,1,this.allPCB[i]);
+                            if(this.allPCB[i-1].finished_time>=this.allPCB[i].arrival_time){
+                                this.allPCB[i].finished_time=this.allPCB[i-1].finished_time+this.allPCB[i].burst_time;
+                            }else{
+                                this.allPCB[i].finished_time=this.allPCB[i].arrival_time+this.allPCB[i].burst_time;
+                            }
+                        }
+                        this.running.splice(0);
+                        this.finish.push(this.allPCB[i]);
+                        this.ready=[...this.allPCB];
+                        this.ready.splice(0,i+1);
+                    },1000*i);
+                }
+            },
+
+            //调度——短作业优先
+            SJF(){
+                this.running.splice(0);
+                this.finish.splice(0);
+                let waiting=[];
+                waiting = [...this.allPCB];
+                waiting.sort(function (a,b) {
+                    return a.arrival_time-b.arrival_time;
+                });
+                this.running.splice(0,0,waiting[0]);
+                waiting[0].finished_time=waiting[0].arrival_time+waiting[0].burst_time;
+                this.finish.push(waiting[0]);
+                waiting.splice(0,1);
+                waiting.sort(function (a,b) {
+                    return a.burst_time-b.burst_time;
+                });
+
+                for(let i=0;i<waiting.length;i++){
+                    if((waiting[i].arrival_time<=this.finish[this.finish.length-1].finished_time)||(i==waiting.length-1)){
+                        this.running.splice(0,1,waiting[i]);
+                        waiting[i].finished_time = this.finish[this.finish.length-1].finished_time+waiting[i].burst_time;
+                        this.finish.push(waiting[i]);
+                        waiting.splice(i,1);
+                        this.ready=[...waiting];
+                        i=-1;
+                    }
+                }
+            },
+
+            //调度——时间片
+            timePiece(){
+                this.finish.splice(0);
+                let PCBArr = [];
+                this.allPCB.forEach((val,index)=>{
+                    PCBArr[index] = new PCB(val.name,val.size,val.arrival_time,val.burst_time,val.priority);
+                });
+
+                let timePiece = prompt("请输入时间片大小")*1;
+
+                PCBArr.sort(function (a,b) {
+                    return a.arrival_time-b.arrival_time;
+                });
+                let finalTime = PCBArr[0].arrival_time;
+                while (PCBArr.length){
+                    for(let i=0;i<PCBArr.length;i++){
+                        if(PCBArr[i].arrival_time<=finalTime){
+                            // 执行顺序
+                            console.log("当前时间",finalTime);
+                            console.log("到达时间",PCBArr[i].arrival_time, "名称",PCBArr[i].name, "剩余时间",PCBArr[i].remaing_time);
+                            if(PCBArr[i].remaing_time>timePiece){
+                                PCBArr[i].remaing_time-=timePiece;
+                                finalTime+=timePiece;
+                            }else{
+                                PCBArr[i].finished_time=finalTime+PCBArr[i].remaing_time;
+                                finalTime+= PCBArr[i].remaing_time;
+                                PCBArr[i].remaing_time=0;
+
+                                this.finish.push(PCBArr[i]);
+                                PCBArr.splice(i,1);
+                                i=i-1;
+                            }
+                        }
+                    }
+                }
+            },
+
+            //调度——优先级
+            priority(){
+                this.running.splice(0);
+                this.finish.splice(0);
+                let waiting=[];
+                waiting = [...this.allPCB];
+                waiting.sort(function (a,b) {
+                    return a.arrival_time-b.arrival_time;
+                });
+                this.running.splice(0,0,waiting[0]);
+                waiting[0].finished_time=waiting[0].arrival_time+waiting[0].burst_time;
+                this.finish.push(waiting[0]);
+                waiting.splice(0,1);
+                waiting.sort(function (a,b) {
+                    return a.priority-b.priority;
+                });
+
+                for(let i=0;i<waiting.length;i++){
+                    if((waiting[i].arrival_time<=this.finish[this.finish.length-1].finished_time)||(i==waiting.length-1)){
+                        this.running.splice(0,1,waiting[i]);
+                        waiting[i].finished_time = this.finish[this.finish.length-1].finished_time+waiting[i].burst_time;
+                        this.finish.push(waiting[i]);
+                        waiting.splice(i,1);
+                        this.ready=[...waiting];
+                        i=-1;
+                    }
+                }
+            },
+
 
             //文件或者文件夹存入外存
             saveToOutMemory(FileOrFolder){
@@ -925,7 +1120,11 @@
                if(this.processName){
                    let flag=this.findProcess(this.ready,this.processName)&&this.findProcess(this.blocked,this.processName)&&this.findProcess(this.running,this.processName);
                    if (flag) {
-                       let PCBTemp = new PCB(this.processName,this.processSize*1);
+                       let arrival_time = prompt("请输入到达时间");
+                       let burst_time = prompt("请输入服务时间");
+                       let priority = prompt("请输入优先级");
+                       let PCBTemp = new PCB(this.processName,this.processSize*1,arrival_time*1,burst_time*1,priority*1);
+                       this.allPCB.push(PCBTemp);
                        this.ready.push(PCBTemp);
                        this.processName = '';
                        this.processSize = '';

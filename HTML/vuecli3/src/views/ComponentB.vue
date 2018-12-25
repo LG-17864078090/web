@@ -9,11 +9,7 @@
 <script>
     export default {
         name: "ComponentB",
-
-            props:['msg']
-
-
-
+        props:['msg']
     }
 </script>
 

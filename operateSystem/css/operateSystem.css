@@ -304,6 +304,27 @@ li{
     border-bottom: 1px solid black;
 }
 
+.scheduling{
+    margin: 10px;
+    clear: both;
+    border-top:3px dashed black;
+    padding-top: 10px;
+}
+.scheduling .schedulingButton{
+    width: 100%;
+}
+.scheduling .showTime{
+    width: 100%;
+    display: flex;
+}
+.scheduling .item{
+    flex: 1;
+    text-align: center;
+}
+.scheduling p{
+    text-align: center;
+}
+
 
 table{ border:0;border-collapse:collapse;}
 td{width: 70px; text-align:center; padding:0 2px;}
