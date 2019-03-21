@@ -1,0 +1,23 @@
+/*! LG专属 */
+#div1 {
+  width: 200px;
+  height: 200px;
+  background: #ff0000;
+}
+
+#div2 {
+  width: 580px;
+  height: 580px;
+  background: url(http://127.0.0.1:8080/images/3cf70953f6a81e5b9483b1e829f8b049.jpg);
+}
+
+#div3 img {
+  width: 700px;
+}
+
+@-webkit-keyframes xxx {
+}
+
+@keyframes xxx {
+}
+

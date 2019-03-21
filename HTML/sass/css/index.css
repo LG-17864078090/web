@@ -1,0 +1,138 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* 这是一个多行注释*/
+/*！这是一个强制注释*/
+/*！正常情况唯独单行注释不能保存到新的文件中，但压缩模式只有强制注释才能转化进去*/
+#div1 {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#div2 {
+  font-size: 16px;
+}
+#div2 a {
+  background: #00b262;
+}
+#div2 a:hover {
+  color: #404040;
+}
+#div2 a-taxt {
+  /* &接着上个选择器拼接成新的选择器 */
+  position: relative;
+}
+
+#span {
+  background: red;
+}
+
+#div3 {
+  background-color: #7A45E5;
+  background-position: right;
+  background-size: cover;
+  border-top-width: 2px;
+  border-top-style: dashed;
+  border-top-color: #7A45E5;
+}
+
+#div4 {
+  width: 200px;
+  height: 200px;
+  color: #ccc;
+}
+
+#div5, #div6 {
+  /*@include name(300px,#0f0);*/
+  width: 300px;
+  height: 300px;
+  color: #0f0;
+}
+#div5 a, #div6 a {
+  font-size: 30px;
+}
+
+#div6 {
+  color: #0000ff;
+}
+
+#div7 {
+  color: rgba(51, 51, 51, 0.5);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#div8 {
+  color: #000;
+}
+
+.cl-1 {
+  width: 1px;
+}
+
+.cl-2 {
+  width: 2px;
+}
+
+.cl-3 {
+  width: 3px;
+}
+
+.cl-4 {
+  width: 4px;
+}
+
+.cl-5 {
+  width: 5px;
+}
+
+.cll-1 {
+  width: 1px;
+}
+
+.cll-2 {
+  width: 2px;
+}
+
+.cll-3 {
+  width: 3px;
+}
+
+.cll-4 {
+  width: 4px;
+}
+
+.cll-5 {
+  width: 5px;
+}
+
+.success {
+  background: icon- success;
+}
+
+.fail {
+  background: icon- fail;
+}
+
+.warm {
+  background: icon- warm;
+}
+
+.div {
+  width: 50px;
+}
+
+.div {
+  width: 30px;
+}
+
+#div10 {
+  width: 3px;
+}
+
+/*# sourceMappingURL=style.scss.map */

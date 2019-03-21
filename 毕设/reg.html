@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="css/commen.css">
+    <link rel="stylesheet" href="css/reg.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <li class="main-memu"><span id="index">首页</span></li>
+        <li class="main-memu now"><span id="reg">注册</span></li>
+        <li class="main-memu"><span id="login">登录</span></li>
+        <li class="main-memu"><span id="about">关于</span></li>
+        <li class="main-memu"><span id="contact">联系我们</span></li>
+    </div>
+
+    <div class="reg">
+        <div class="container">
+            <div class="select-work">
+                <input name="work" type="radio" value="学生"><span>学生</span>
+                <input name="work" type="radio" value="家长"><span>家长</span>
+                <input name="work" type="radio" value="老师"><span>老师</span>
+            </div>
+            <div class="student">
+                <span class="tip">学号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 账号已存在</span><br/>
+                <span class="tip">密码:</span>
+                <input type="password" class="input">
+                <span class="warming"> 密码错误</span><br/>
+                <span class="tip">确认密码:</span>
+                <input type="password" class="input">
+                <span class="warming"> 密码不一致</span><br/>
+                <span class="tip">姓名:</span>
+                <input type="text" class="input">
+                <span class="warming"> 姓名</span><br/>
+                <span class="tip">性别:</span>
+                <input type="radio" value="男">男 <input type="radio" value="女">女
+                <span class="warming"> 请选择性别</span><br/>
+                <span class="tip">手机号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 密码不一致</span><br/>
+                <span class="tip">家庭住址:</span>
+                <input type="text" class="input"><br/>
+
+                <span class="tip">教师工号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 工号不存在</span><br/>
+            </div>
+
+            <div class="parent">
+                <span class="tip">学号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 账号已存在</span><br/>
+                <span class="tip">密码:</span>
+                <input type="password" class="input">
+                <span class="warming"> 密码错误</span><br/>
+                <span class="tip">确认密码:</span>
+                <input type="password" class="input">
+                <span class="warming"> 密码不一致</span><br/>
+                <span class="tip">姓名:</span>
+                <input type="text" class="input">
+                <span class="warming"> 姓名</span><br/>
+                <span class="tip">性别:</span>
+                <input type="radio" value="男">男 <input type="radio" value="女">女
+                <span class="warming"> 请选择性别</span><br/>
+                <span class="tip">手机号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 密码不一致</span><br/>
+                <span class="tip">家庭住址:</span>
+                <input type="text" class="input"><br/>
+
+                <span class="tip">教师工号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 工号不存在</span><br/>
+            </div>
+
+            <div class="teacher">
+                <span class="tip">工号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 账号已存在</span><br/>
+                <span class="tip">密码:</span>
+                <input type="password" class="input">
+                <span class="warming"> 密码错误</span><br/>
+                <span class="tip">确认密码:</span>
+                <input type="password" class="input">
+                <span class="warming"> 密码不一致</span><br/>
+                <span class="tip">姓名:</span>
+                <input type="text" class="input">
+                <span class="warming"> 姓名</span><br/>
+                <span class="tip">性别:</span>
+                <input type="radio" value="男">男 <input type="radio" value="女">女
+                <span class="warming"> 请选择性别</span><br/>
+                <span class="tip">手机号:</span>
+                <input type="text" class="input">
+                <span class="warming"> 密码不一致</span><br/>
+                <span class="tip">家庭住址:</span>
+                <input type="text" class="input">
+            </div>
+
+
+
+            <button>注册</button>
+            <p class="tip">学生与家长注册的需要老师辅助验证</p>
+        </div>
+    </div>
+
+
+    <div class="footer">© 学生学情管理系统</div>
+
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.student').hide();
+        $('.parent').hide();
+        $('.teacher').hide();
+        $('input[type=radio][name=work]').change(function() {
+            if (this.value == '学生') {
+                $('.student').show();
+                $('.parent').hide();
+                $('.teacher').hide();
+            }else if (this.value == '家长') {
+                $('.student').hide();
+                $('.parent').show();
+                $('.teacher').hide();
+            }else if (this.value == '老师') {
+                $('.student').hide();
+                $('.parent').hide();
+                $('.teacher').show();
+            }
+        });
+    });
+</script>
+</body>
+</html>
