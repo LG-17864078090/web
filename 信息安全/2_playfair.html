@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Playfair</title>
+    <style>
+        .center{
+            width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #cccccc;
+        }
+        .input>span{
+            display: inline-block;
+            width: 90px;
+            text-align: justify;
+        }
+        .input>button{
+            margin: 20px 10px;
+        }
+        .result{
+            width: 350px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #cccccc;
+        }
+        #table{
+            margin: 20px auto;
+            width: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #cccccc;
+        }
+        #table>div{
+            width: 20%;
+            box-sizing: border-box;
+            height: 40px;
+            border: 1px solid #ccc;
+            line-height: 40px;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+
+    <div class="input">
+        <span>密匙:</span><input type="text" id="Key"><br>
+        <span>铭文/密文:</span><input type="text" id="Text"><br>
+        <button onclick="encrypt()">加密</button>
+        <button onclick="disEncrypt()">解密</button>
+    </div>
+
+    <div class="result">
+    </div>
+
+    <div id="table">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<script>
+
+    var Playfair={
+        CreatTable(key){//根据秘钥生成25位数组
+            Str = 'abcdefghijklmnopqrstuvwxyz';
+            key+=Str;
+            var temp = key.split('');
+            while (temp.indexOf('j') != -1){//把所有j替换为i
+                temp[temp.indexOf('j')]='i';
+            }
+            var set = new Set(temp);
+            return Array.from(set);
+        },
+
+        Encrypt(K,P){//加密算法
+            tempP = P.split('');
+            for(var i =0; i<tempP.length-1; i++){//明文j换i,相邻两个相等插入X
+                if(tempP[i] == 'j'){
+                    temp[i] = 'i';
+                }
+                if(tempP[i] == tempP[i+1]){
+                    tempP.splice(i+1,0,'x');
+                    i++;
+                }
+            }
+            if(tempP.length%2 == 1){//明文长度为奇数，尾部加‘x’
+                tempP.splice(tempP.length,0,'x')
+            }
+            var tempArr = this.CreatTable(K);
+            var result = '';
+            for(var i=0; i<tempP.length; i+=2){ //坐标替换
+                var r1 = Math.floor(tempArr.indexOf(tempP[i])/5);
+                var c1 = tempArr.indexOf(tempP[i])%5;
+                var r2 = Math.floor(tempArr.indexOf(tempP[i+1])/5);
+                var c2 = tempArr.indexOf(tempP[i+1])%5;
+                var newC1 = 0;
+                var newC2 = 0;
+                var newR1 = 0;
+                var newR2 = 0;
+                if(r1 == r2){
+                    newR1 = r1;
+                    newR2 = r1;
+                    newC1 = (c1+1)%5;
+                    newC2 = (c2+1)%5;
+                }else if(c1 == c2){
+                    newC1 = c1;
+                    newC2 = c1;
+                    newR1 = (r1+1)%5;
+                    newR2 = (r2+1)%5;
+                }else{
+                    newR1 = r1;
+                    newC1 = c2;
+                    newR2 = r2;
+                    newC2 = c1;
+                }
+                result+=tempArr[newR1*5+newC1];
+                result+=tempArr[newR2*5+newC2];
+            }
+            return result;
+        },
+
+        DisEncrypt(K,C){//解密算法
+            tempC = C.split('');
+            var tempArr = this.CreatTable(K);
+            var result = '';
+            for(var i=0; i<tempC.length; i+=2){
+                var r1 = Math.floor(tempArr.indexOf(tempC[i])/5);
+                var c1 = tempArr.indexOf(tempC[i])%5;
+                var r2 = Math.floor(tempArr.indexOf(tempC[i+1])/5);
+                var c2 = tempArr.indexOf(tempC[i+1])%5;
+                var newC1 = 0;
+                var newC2 = 0;
+                var newR1 = 0;
+                var newR2 = 0;
+                if(r1 == r2){
+                    newR1 = r1;
+                    newR2 = r1;
+                    newC1 = (c1+5-1)%5;
+                    newC2 = (c2+5-1)%5;
+                }else if(c1 == c2){
+                    newC1 = c1;
+                    newC2 = c1;
+                    newR1 = (r1+5-1)%5;
+                    newR2 = (r2+5-1)%5;
+                }else{
+                    newR1 = r1;
+                    newC1 = c2;
+                    newR2 = r2;
+                    newC2 = c1;
+                }
+                result+=tempArr[newR1*5+newC1];
+                result+=tempArr[newR2*5+newC2];
+            }
+            return result;
+        }
+    };
+
+    function encrypt(){
+        var key = document.getElementById('Key').value;
+        var p = document.getElementById('Text').value;
+        var oTable = document.getElementById('table');
+        for(var i=0; i<25; i++){//显示表格
+            if(Playfair.CreatTable(key)[i] == 'i'){
+                oTable.children[i].innerHTML = 'i/j';
+            }else{
+                oTable.children[i].innerHTML = Playfair.CreatTable(key)[i];
+            }
+        }
+        document.getElementsByClassName('result')[0].innerHTML = Playfair.Encrypt(key,p);
+    }
+    function disEncrypt(){
+        var key = document.getElementById('Key').value;
+        var c = document.getElementById('Text').value;
+        var oTable = document.getElementById('table');
+        for(var i=0; i<25; i++){//显示表格
+            if(Playfair.CreatTable(key)[i] == 'i'){
+                oTable.children[i].innerHTML = 'i/j';
+            }else{
+                oTable.children[i].innerHTML = Playfair.CreatTable(key)[i];
+            }
+        }
+        document.getElementsByClassName('result')[0].innerHTML = Playfair.DisEncrypt(key,c);
+
+    }
+</script>
+
+</body>
+</html>
