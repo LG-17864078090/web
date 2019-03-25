@@ -30,7 +30,16 @@
     width: 230px;
 }
 .reg .container .tip{
-    margin-left: 30px;
+    display: inline-block;
+    width: 68px;
+    height: 42px;
+    vertical-align: -webkit-baseline-middle;
+    text-align: justify;
+}
+.reg .container .tip:after{
+    content: " ";
+    display: inline-block;
+    width: 100%;
 }
 .reg .container>button{
     display: block;
