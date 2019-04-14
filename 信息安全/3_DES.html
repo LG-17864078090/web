@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DES算法</title>
+    <style>
+        .container{
+            width: 600px;
+            margin: 20px auto;
+            border: 1px solid #CCCCCC;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .container>div{
+            flex: 1;
+            margin: 6px auto;
+        }
+        .container>button{
+            display: block;
+            width: 20%;
+            margin: 10px auto;
+            padding: 5px;
+        }
+        .container #enStr,#dnStr{
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <div>
+        <span>明文：</span><input type="text" id="str">
+    </div>
+    <div>
+        <span>key1：</span><input type="text" id="key1">
+    </div>
+    <div>
+        <span>key2：</span><input type="text" id="key2">
+    </div>
+    <div>
+        <span>key3：</span><input type="text" id="key3">
+    </div>
+    <button onclick="getResult()">加密与解密</button>
+
+    <span>加密结果</span>
+    <h4 id="enStr">qeada</h4>
+    <span>解密结果</span>
+    <h4 id="dnStr">safasf</h4>
+
+</div>
+
+<script type="text/javascript" src="DES.js"></script>
+<script>
+    function getResult(){
+        //待加密字符串
+        var str = document.getElementById("str").value;
+        //第一个参数必须；第二个、第三个参数可选
+        var key1 = document.getElementById("key1").value;
+        var key2 = document.getElementById("key2").value;
+        var key3 = document.getElementById("key3").value;
+        //加密方法
+        var  enResult = strEnc(str,key1,key2,key3);
+        //解密方法
+        var deResult = strDec(enResult,key1,key2,key3);
+        //展示结果
+        document.getElementById("enStr").innerText = enResult;
+        document.getElementById("dnStr").innerText = deResult;
+    }
+</script>
+</body>
+</html>

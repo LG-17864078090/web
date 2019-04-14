@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RSA</title>
+</head>
+<body>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+    function isPrimeNum(num){  //判断是不是质数
+        if(typeof num !=="number"){
+            return false;
+        }else if(num<2){
+            return false;
+        }else if(num ===2){
+            return true;
+        }else if(num%2 === 0){
+            return false;
+        }
+        let sq = Math.sqrt(num);
+        for(let i=3; i <= sq; i+=1){
+            if(num % i === 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    function isMutualPrime(a,b) {  //判断互为质数
+        var t;
+        if(a<b)
+        {
+            t=a;a=b;b=t;
+        }
+        while(a%b)
+        {
+            t=b;
+            b=a%b;
+            a=t;
+        }
+        return b;
+    }
+
+    function getNum(x,y){  //生成x-y的随机数
+        return Math.floor(Math.random() * (y - x + 1) + x);
+    }
+
+    function getPrimeNum() {  //生成质数
+        var temp = getNum(0,50);
+        for(var i=temp; ;i++){
+            if(isPrimeNum(i)){
+                return i;
+            }
+        }
+    }
+    function RSAAlgorithm(){
+        //1.首先选择两个简单的质数p,q
+        var p=getPrimeNum();
+        var q=getPrimeNum();
+        while(p==q){
+            q=getPrimeNum();
+        }
+        var n=p*q;
+
+
+        //随机选择余数r,保证r与(p-1)*(q-1)互质
+        let r;
+        while (isMutualPrime(r,(p-1)*(q-1))!==1){
+            r = getNum(1,n);
+        }
+        //得到private key是p,q,r
+        document.write("----------------------------------<br>");
+        document.write("<B>Private Key：</B><br>");
+        document.write("p= "+p+"<br>");
+        document.write("q= "+q+"<br>");
+        document.write("r= "+r+"<br>");
+        document.write("----------------------------------<br>");
+        //2.计算private key
+        //找到d,保证rd ==1 mod (p-1)*(q-1)
+        var num=0;
+        for(var a=0;a<500;a++){
+            if(r*a%((p-1)*(q-1))==1){
+                num=a;
+                break;
+            }
+        }
+        var d=num;
+        if(d>0){
+            document.write("<br>找到d= "+num+" ,计算余数="+(num*r)%((p-1)*(q-1))+",成功！<br>");
+        }
+        else{
+            document.write("找不到满足条件的d,请调整参数");
+        }
+        document.write("----------------------------------<br>");
+        document.write("<B>Private Key：<br></B>");
+        document.write("d= "+d+"<br>");
+        document.write("n= "+n+"<br>");
+        document.write("----------------------------------<br>");
+        document.write("<br>");
+
+        document.write("<B>#演示加密过程#</B><br>");
+        var text=20; //明文
+        document.write("明文="+text+"<br>");
+        //接下来, 计算 etext == text^r mod n, (0 <= b < n)
+        var etext=Math.pow(text,r)%n;
+        document.write("加密后的内容:"+etext+"<br>");
+        document.write("<br>");
+        document.write("<B>#演示加密过程#</B><br>");
+        //text=etext^m mod pq
+        var text=Math.pow(etext,d)%n;
+        document.write("解密后的内容:"+text+"<br>");
+    }
+
+    RSAAlgorithm();
+
+</SCRIPT>
+
+</body>
+</html>
+
